@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Make America Doodle Again</title>
+    <script src="https://fb.me/react-0.14.7.min.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.min.js"></script>
+    <!--<script src="https://unpkg.com/react@15.3.2/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js"></script>
+    <!--<script src="js/dropzone.js"></script>-->
+    <!--<script src = "https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    
+    <style>@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
+    
+    body,html{
+        font-family:helvetica;
+        background:#f6f6f6;
+        width:100%;
+        height:100%;
+        position:absolute;
+        margin:0px;
+        overflow-x:hidden;
+        overflow-y:visible;
+    }
+    
+    
+    
+    .card{
+        width:400px;
+        height:600px;
+        box-shadow: 0px 1px 8px rgba(0,0,0,.1);
+        background:white;
+        position:absolute;
+        top:40px;
+        border-radius:5px;
+    }
+    
+    
+    .card.current{
+        z-index:10;
+        left:50%;
+        margin-left:-200px;
+        transition: width .3s, height .3s, margin-top .3s, margin-left .3s, top .3s, left .3s;
+    }
+    
+    .card.current[data-active="true"]{
+        left:0px;
+        top:0px;
+        margin-left:0px;
+        margin-top:0px;
+        width:100%;
+        height:100%;
+        border-radius:0px;
+        background:white!important;
+    }
+    
+    .card.current[data-active="true"] .image{
+        background:white!important;
+    }
+    
+    .card:hover{
+        background:#fee;
+    }
+    
+    .card .image{
+        height:100%;
+        background-size:cover;
+    }
+    
+    .card.prev{
+        left: -350px;
+        z-index:5;
+    }
+    
+    .card.next{
+        right: -350px;
+        z-index:5;
+        margin-right:0px;
+    }
+    
+    #guess-button{
+        background: #222;
+        color: white;
+        padding: 30px 20px;
+        border-radius: 5px;
+        top: 680px;
+        position: absolute;
+        width: 200px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 20px;
+        box-sizing: border-box;
+        left: 50%;
+        margin-left: -100px;
+        margin-bottom:30px;
+    }
+    
+    #guess-button:hover{
+        background:#444;
+        cursor:pointer;
+    }
+    
+    /***************** GUESSING *****************/
+    
+    #guessingContainer{
+        position:absolute;
+        z-index:100;
+        width:100%;
+        height:100%;
+    }
+    
+    #candidates{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        background: #222;
+        line-height: 50px;
+        color: white;
+        overflow:hidden;
+        height:50px;
+    }
+    
+    #currentCandidate{
+        position: absolute;
+        width: 50%;
+        margin-left: -25%;
+        left: 50%;
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    #nextCandidate{
+        position: absolute;
+        right:0px;
+        width: 50%;
+        margin-right: -25%;
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    #prevCandidate{
+        position: absolute;
+        width: 50%;
+        margin-left: -25%;
+        left: 0px;
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    #issues{
+        top: 300px;
+        bottom: 0px;
+        width:100%;
+        position:absolute;
+        overflow:scroll;
+    }
+    
+    #issuesInner{
+        width: 100%;
+        margin:auto;
+        max-width: 400px;
+        position: relative;
+    }
+    
+    .issue{
+        background:#222;
+        margin:5px;
+        padding:5px;
+        border-radius:5px;
+        font-size:24px;
+        color:white;
+        float:left;
+    }
+    
+    #doodleImage{
+        width:100%;
+        max-width:400px;
+        height:250px;
+        background-size:contain;
+        margin:auto;
+    }
+    
+    @media (max-width:480px){
+           .card{
+            width:240px;
+            height:360px;
+            box-shadow: 0px 1px 8px rgba(0,0,0,.1);
+            background:white;
+            position:absolute;
+        }
+        
+        .card.current{
+            margin-left:-120px;
+        }
+        
+        .card.prev{
+            left: -200px;
+        }
+        
+        .card.next{
+            right: -200px;
+        }
+        #guess-button{
+            background: #222;
+            color: white;
+            padding: 20px 10px;
+            border-radius: 5px;
+            top:450px;
+            position: absolute;
+            width: 180px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 15px;
+            box-sizing:border-box;
+            left:50%;
+            margin-left:-90px;
+        }
+        
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <div id="container">
+    
+    </div>
+    
+    <script type="text/babel">
+    
+    //Dropzone.autoDiscover = false;
+
+
+var Guessing = React.createClass({
+    propTypes: {
+        
+    },
+    getInitialState: function() {
+        return {
+            candidateChoiceIndex: 1,
+            issueChoiceIndex: null
+        };
+    },
+    changeCandidateChoice: function(e){
+        var index = this.state.candidateChoiceIndex;
+        if(e.currentTarget.getAttribute('data-direction') == "next"){
+            index++;
+        }else{
+            index--;
+        }
+        if(index < 0){
+            index = this.props.candidates.length-1;
+        }else if(index > this.props.candidates.length-1){
+            index = 0;
+        }
+        this.setState({candidateChoiceIndex:index});
+    },
+    renderCandidates: function(){
+        
+        var index = this.state.candidateChoiceIndex;
+        var prevIndex = this.state.candidateChoiceIndex-1;
+        var nextIndex = this.state.candidateChoiceIndex+1;
+        if(this.props.candidates.length > 1 && this.props.issues.length > 1)
+        {
+            if(prevIndex < 0){
+                prevIndex = this.props.candidates.length-1;
+            }else if(nextIndex > this.props.candidates.length-1){
+                nextIndex = 0;
+            }
+            console.log("1: "+prevIndex+" 2: "+index+" 3: "+nextIndex);
+            return(<div id = "candidates">
+                <div onClick = {this.changeCandidateChoice.bind(this)} data-direction="prev" id = "prevCandidate">{this.props.candidates[prevIndex].first_name+" "+this.props.candidates[prevIndex].last_name}</div>
+                <div id = "currentCandidate">{this.props.candidates[index].first_name+" "+this.props.candidates[index].last_name}</div>
+                <div onClick = {this.changeCandidateChoice.bind(this)} data-direction="next" id = "nextCandidate">{this.props.candidates[nextIndex].first_name+" "+this.props.candidates[nextIndex].last_name}</div>
+            </div>);
+        }
+    },
+    eachIssue: function(issue,i){
+        return(<div onClick={this.makeGuess.bind(this)} className = "issue" data-issue-id={issue.id}>{issue.id} {issue.name}</div>)
+    },
+    renderIssues: function(){
+        var allIssues = this.props.issues;
+        var sevenIssues = [];
+        var sevenNumbers = [];
+        console.log('doodle issue id:'+this.props.doodle.issue_id);
+        sevenNumbers.push(this.props.doodle.issue_id);
+        sevenIssues.push(allIssues[this.props.doodle.issue_id]);
+        for(var i=0;i<6;i++){
+            var randomNumber = getRandomArbitrary(0,allIssues.length-1);
+            if(!isInArray(randomNumber,sevenNumbers)){
+                sevenNumbers.push(randomNumber);
+                sevenIssues.push(allIssues[randomNumber]);
+            }else{
+                i--;
+            }
+        }
+        sevenIssues = shuffle(sevenIssues);
+        console.log(sevenNumbers);
+        console.log(sevenIssues);
+        return(<div id = "issuesInner">{sevenIssues.map(this.eachIssue.bind(this))}</div>);
+    },
+    makeGuess: function(e){
+        var issueID=e.currentTarget.getAttribute('data-issue-id');
+        var candidateID=this.props.candidates[this.state.candidateChoiceIndex].id;
+        console.log('issue_id: '+issueID);
+        console.log('candidate_id: '+candidateID);
+        console.log('Correct issue_id: '+this.props.doodle.candidate_id);
+        console.log('Correct candidate_id: '+this.props.doodle.issue_id);
+        if(this.props.doodle.candidate_id == candidateID && this.props.doodle.issue_id == issueID){
+            this.props.correctGuess();
+            this.props.turnOffGuessing();
+        }else{
+            alert('nope!');
+        }
+    },
+    render: function() {
+        if(this.props.guessing){
+            return(<div id = "guessingContainer">
+                <div id = "doodleImage" style={{background:'url(doodleImages/'+this.props.doodle.img+') center center no-repeat',backgroundSize:'contain'}}></div>
+                {this.renderCandidates()}
+                <div id = "issues"><div id = "issuesInner">{this.props.sevenIssues.map(this.eachIssue.bind(this))}</div></div>
+            </div>);
+        }
+        return(<div></div>);
+        
+    }
+});
+
+var App = React.createClass({
+    getInitialState: function() {
+        return {
+          doodleData: [],
+          issueData: [],
+          sevenIssues: [],
+          candidateData: [],
+          currentDoodleIndex: 0,
+          guessing:false,
+          correctGuesses: 0
+        };
+     },
+     changeCurrentCard: function(e){
+        var index = Number(e.currentTarget.getAttribute('data-index'));
+        var direction = e.currentTarget.getAttribute('data-direction');
+        if(direction == "left"){
+            this.setState({transitionCards:"left"});
+            if(index < 0){
+                index = this.state.doodleData.length-1;
+            }
+        }else{
+            this.setState({transitionCards:"right"});
+            if(index > this.state.doodleData.length-1){
+                index = 0;
+            }
+        }
+        
+        setTimeout(function(){
+            this.setState({currentDoodleIndex:index,transitionCards:"none"});
+        }.bind(this),500);
+         
+     },
+     nextCard: function(e){
+        var index = Number(this.state.currentDoodleIndex)+1;
+        if(index > this.state.doodleData.length-1){
+            index = 0;
+        }
+        console.log(index);
+        setTimeout(function(){
+            this.setState({currentDoodleIndex:index,transitionCards:"none"});
+        }.bind(this),500);
+         
+     },
+     /*renderEachDoodleCard: function(doodle,i) {
+         var active = false;
+         if(this.state.currentDoodleIndex == i){
+             active = true;
+         }
+         return(<div className = "card" data-active={active} onClick={this.changeCurrentCard} data-id={doodle.id} data-index={i}>
+            <div className = "image" style = {{background:'url('+doodle.img+') center center',backgroundSize:'contain'}}></div>
+         </div>);
+     },*/
+     renderCurrentDoodleCard: function() {
+         var index = this.state.currentDoodleIndex;
+         var doodle = this.state.doodleData[index];
+         return(<div data-active = {this.state.guessing} className = "card current" onClick={this.activateGuessing} data-id={doodle.id} data-index={index}>
+            <div className = "image" style = {{background:'url(doodleImages/'+doodle.img+') center center no-repeat',backgroundSize:'cover'}}>{index}</div>
+         </div>);
+     },
+     renderNextDoodleCard: function() {
+         var index = this.state.currentDoodleIndex+1;
+         if(index>this.state.doodleData.length-1){
+             index = 0;
+         }
+         var doodle = this.state.doodleData[index];
+         return(<div className = "card next" onClick={this.changeCurrentCard} data-id={doodle.id} data-index={index}>
+            <div className = "image" style = {{background:'url(doodleImages/'+doodle.img+') center center no-repeat',backgroundSize:'cover'}}>{index}</div>
+         </div>);
+     },
+     renderPrevDoodleCard: function() {
+         var index = this.state.currentDoodleIndex-1;
+         if(index<0){
+             index = this.state.doodleData.length-1;
+         }
+         var doodle = this.state.doodleData[index];
+         return(<div className = "card prev" onClick={this.changeCurrentCard} data-id={doodle.id} data-index={index}>
+            <div className = "image" style = {{background:'url(doodleImages/'+doodle.img+') center center no-repeat',backgroundSize:'cover'}}>{index}</div>
+         </div>);
+     },
+     activateGuessing: function(e){
+        var allIssues = this.state.issueData;
+        var sevenIssues = [];
+        var sevenNumbers = [];
+        console.log('doodle issue id:'+this.state.doodleData[Number(this.state.currentDoodleIndex)].issue_id);
+        sevenNumbers.push(Number(this.state.currentDoodleIndex));
+        sevenIssues.push(allIssues[findElement(allIssues,"id",this.state.doodleData[Number(this.state.currentDoodleIndex)].issue_id)]);
+        for(var i=0;i<6;i++){
+            var randomNumber = getRandomArbitrary(0,allIssues.length-1);
+            if(!isInArray(randomNumber,sevenNumbers)){
+                sevenNumbers.push(randomNumber);
+                sevenIssues.push(allIssues[randomNumber]);
+            }else{
+                i--;
+            }
+        }
+        sevenIssues = shuffle(sevenIssues);
+        console.log(sevenNumbers);
+        this.setState({sevenIssues:sevenIssues, guessing:true});
+     },
+     componentDidMount: function() {
+        
+        this.serverRequest = $.ajax({
+                   url: 'service/doodles/',
+                   type: 'get',
+                   dataType: 'json',
+                   //data: {"mapID" : mapID},
+                   contentType: "application/json",
+                   success: function(data) {
+                       
+                        console.log('doodle data:');
+                        console.log(data);
+                        
+                        //currMapData = Object(JSON.parse(decodeURIComponent(data)));
+                       
+                        this.setState({
+                            doodleData: data
+                        });
+                        
+                        
+                        
+                        
+                        
+                        //console.log(this.state.mapData);
+                        //initiateDropzones();
+                   }.bind(this)
+        });
+        
+        this.serverRequest = $.ajax({
+                   url: 'service/issues/',
+                   type: 'get',
+                   dataType: 'json',
+                   //data: {"mapID" : mapID},
+                   contentType: "application/json",
+                   success: function(data) {
+                       
+                        console.log('doodle data:');
+                        console.log(data);
+                        
+                        //currMapData = Object(JSON.parse(decodeURIComponent(data)));
+                       
+                        this.setState({
+                            issueData: data
+                        });
+                        
+                        
+                        
+                        
+                        
+                        //console.log(this.state.mapData);
+                        //initiateDropzones();
+                   }.bind(this)
+        });
+        
+        this.serverRequest = $.ajax({
+                   url: 'service/candidates/',
+                   type: 'get',
+                   dataType: 'json',
+                   //data: {"mapID" : mapID},
+                   contentType: "application/json",
+                   success: function(data) {
+                       
+                        console.log('doodle data:');
+                        console.log(data);
+                        
+                        //currMapData = Object(JSON.parse(decodeURIComponent(data)));
+                       
+                        this.setState({
+                            candidateData: data
+                        });
+                        
+                        
+                        
+                        
+                        
+                        //console.log(this.state.mapData);
+                        //initiateDropzones();
+                   }.bind(this)
+        });
+        
+        //sendMapData($.extend( true, {}, this.state.mapData ));
+        
+        //initiateDropzones();
+    },
+    turnOffGuessing: function(){
+      this.setState({guessing:false}); 
+      setTimeout(function(){
+          this.nextCard();
+      }.bind(this),500);
+    },
+    correctGuess: function(){
+      var correctGuesses = this.state.correctGuesses+1;
+      if(correctGuesses == 1){
+          alert('Nice, you got one right, guess 2 more and you\'ll get to draw!');
+      }else if(correctGuesses >= 3){
+          alert('Nice, you got three right, now its your turn to draw! :)');
+      }else{
+          alert('nice!');
+      }
+      this.setState({correctGuesses:correctGuesses});
+    },
+  render: function() {
+      
+      if(this.state.doodleData.length > 0){
+          return(<div>
+          {this.renderPrevDoodleCard()}
+          {this.renderCurrentDoodleCard()}
+          {this.renderNextDoodleCard()}
+          <div id = "guess-button" onClick={this.activateGuessing}>Guess</div>
+          <Guessing
+            correctGuess = {this.correctGuess.bind(this)}
+            turnOffGuessing = {this.turnOffGuessing.bind(this)}
+            guessing = {this.state.guessing}
+            doodle={this.state.doodleData[this.state.currentDoodleIndex]}
+            issues={this.state.issueData}
+            sevenIssues={this.state.sevenIssues}
+            candidates={this.state.candidateData}/>
+          </div>);
+      }
+      return(<div></div>);
+    //return(<div>{this.state.doodleData.map(this.renderEachDoodleCard)}</div>);
+  }
+});
+
+ReactDOM.render(<App />, document.getElementById('container'));
+
+function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+
+function isInArray(value, array) {
+  return array.indexOf(value) > -1;
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+function initiateDropzones(){
+    $('.dropzone').each(function(i){
+        $(this).removeClass('new');
+        createDropzone($(this).attr('id'));
+    })
+}
+
+function initiateNewDropzones(){
+    $('.dropzone.new').each(function(i){
+        $(this).removeClass('new');
+        console.log(i);
+        createDropzone($(this).attr('id'));
+    })
+}
+
+//initiates a new dropzone object
+         function createDropzone(dropzoneName){
+            console.log(dropzoneName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase());
+            //myAwesomeDropzone = new Dropzone("#my-awesome-dropzone-num", { url: "../cgi/newUploader.exe"});
+            $("form#"+dropzoneName).dropzone({
+                  paramName: "file", // The name that will be used to transfer the file
+                  maxFilesize: 3, // MB
+                  url: 'PHP_Setters/uploadCanvasImage.php',
+                  dictDefaultMessage: '',
+                  maxThumbnailFilesize: 100,
+                  thumbnailWidth: 2000,
+                  thumbnailHeight: 2000,
+                  acceptedFiles: 'image/*',
+                  thumbnail: function(file, dataUrl) {
+                    $(this.element).parent().css('background', 'transparent url("'+dataUrl+'") center center no-repeat');
+                    //$(this.element).parent().css('background-size', 'contain');
+                    $(this.element).parent().children().hide();
+                  },
+                  success: function(file, data){
+                    //console.log(data);
+                    //$(this.element).parent().parent().find('.closeButton').remove();
+                    $(this.element).parent().attr('backgroundlink', data);
+                    //$(this.element).parent().css('background', 'transparent url("'+data+'") center center no-repeat');
+                    //$(this.element).parent().append('<div class = "closeButton"></div>');
+                    
+                  }
+                });
+         }
+         
+            
+            
+            
+            
+            function findElement(arr, propName, propValue) {
+              for (var i=0; i < arr.length; i++)
+                if (arr[i][propName] == propValue)
+                  return i;
+            
+              // will return undefined if not found; you could return a default instead
+            }
+
+            
+    </script>
+        
+</body>
+</html>
