@@ -227,14 +227,35 @@
     </style>
 </head>
 <body>
-    
     <div id="container">
     
+    <h1 id="bigOne"></h1>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+
+    <script>
+    // Initialize Firebase
+    
+
+    
+
+    </script>
+
+
     </div>
     
     <script type="text/babel">
     
     //Dropzone.autoDiscover = false;
+
+    var config = {
+    apiKey: "AIzaSyBU2gpSPOXQud13jn_XfG499tmnuARIJdI",
+    authDomain: "makeamericadoodleagain.firebaseapp.com",
+    databaseURL: "https://makeamericadoodleagain.firebaseio.com",
+    storageBucket: "",
+    messagingSenderId: "26288147536"
+    };
+    firebase.initializeApp(config);
 
 
 var Guessing = React.createClass({
@@ -432,7 +453,7 @@ var App = React.createClass({
         this.setState({sevenIssues:sevenIssues, guessing:true});
      },
      componentDidMount: function() {
-        
+        /*
         this.serverRequest = $.ajax({
                    url: 'service/doodles/',
                    type: 'get',
@@ -484,7 +505,12 @@ var App = React.createClass({
                         //initiateDropzones();
                    }.bind(this)
         });
+        */
+        var bigOne = document.getElementById('bigOne');
+        var dbRef = firebase.database().ref().child('candidates').child(1).child('name');
+        dbRef.on('value', snap => this.setState({candidateData:data});
         
+        /*
         this.serverRequest = $.ajax({
                    url: 'service/candidates/',
                    type: 'get',
@@ -509,7 +535,7 @@ var App = React.createClass({
                         //console.log(this.state.mapData);
                         //initiateDropzones();
                    }.bind(this)
-        });
+        });*/
         
         //sendMapData($.extend( true, {}, this.state.mapData ));
         
