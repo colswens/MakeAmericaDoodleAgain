@@ -5,8 +5,6 @@
 	</head>
 	<body>
 
-    <h1 id="bigOne"></h1>
-
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
 
     <script>
@@ -20,9 +18,16 @@
     };
     firebase.initializeApp(config);
 
-    var bigOne = document.getElementById('bigOne');
-    var dbRef = firebase.database().ref().child('candidates').child('1').child('name');
-    dbRef.on('value', snap => bigOne.innerText = snap.val());
+
+function writeUserData(userId, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });    
+}
+
+writeUserData(1, 'Chris', 'Chris@gmail.com', 'image.jpg');
 
     </script>
 
