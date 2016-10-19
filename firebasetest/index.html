@@ -19,7 +19,10 @@
     firebase.initializeApp(config);
 
 
-function writeUserData(userId, name, email, imageUrl) {
+
+    
+
+    function writeUserData(userId, name, email, imageUrl) {
     firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
@@ -27,10 +30,33 @@ function writeUserData(userId, name, email, imageUrl) {
   });    
 }
 
-writeUserData(1, 'Chris', 'Chris@gmail.com', 'image.jpg');
+    //Create an instance of the Facebook provider object
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    //sign in by redirecting to the sign-in page
+    firebase.auth().signInWithRedirect(provider);
+
+
+    firebase.auth().getRedirectResult().then(function(result) {
+    if (result.credential) {
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    var token = result.credential.accessToken;
+    // ...
+    }
+    // The signed-in user info.
+    var user = result.user;
+    }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    });
 
     </script>
 
 	</body>
 
-</html>
+</html> 
