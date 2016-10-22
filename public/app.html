@@ -19,7 +19,7 @@
     
     body,html{
         font-family:helvetica;
-        background:#f6f6f6;
+        background:#472094;
         width:100%;
         height:100%;
         position:absolute;
@@ -125,6 +125,8 @@
         width: 150px;
         text-align: center;
         margin: auto;
+        color:#FE4841!important;
+        cont-size:30px;
     }
     
     #doodle{
@@ -133,7 +135,7 @@
         width: 150px;
         text-align: center;
         margin: auto;
-        background: black;
+        background: #FE4841;
         border-radius: 100px;
         margin-top: 20px;
         color: white;
@@ -141,10 +143,21 @@
     
     #fullStance{
         text-align: center;
-        font-weight: bold;
         margin: auto;
-        max-width: 400px;
+        max-width: 300px;
         width: 100%;
+        font-size: 40px;
+        background: #FE4841;
+        padding: 20px;
+        color: white;
+        position:relative;
+        top:100px;
+        font-style:italic;
+    }
+
+    #fullStance>span{
+        font-weight:bold;
+        font-style:normal;
     }
     
     #back{
@@ -154,27 +167,44 @@
     #timer{
         text-align:center;
         padding:20px;
-        font-size: 40px;
+        font-size: 100px;
+        color:white;
+        margin-top:120px;
     }
     
     #done{
-        margin: auto;
+        margin-left:-45px;
+        left:50%;
         text-align: center;
-        position: relative;
+        bottom:40px;
+        position: absolute;
         padding: 20px;
-        margin-top: 100px;
         background: black;
         width: 60px;
         border-radius: 60px;
         color: white;
+        background:#FE4841;
     }
     
     #replay{
         padding:20px;
+        margin:20px auto;
+        background:#FE4841;
+        color:white;
+        border-radius:50px;
+        width:100px;
+        text-align:center;
     }
     
     #shareit{
         padding:20px;
+        margin:auto;
+        background:#FE4841;
+        color:white;
+        border-radius:50px;
+        width:100px;
+        text-align:center;
+        margin-top:100px;
     }
 
     #mainNav{
@@ -222,6 +252,7 @@
     #chooseScreen, #drawScreen, #shareScreen{
         position:relative;
         z-index:1;
+        height:100%;
     }
 
     #landingPage{
@@ -229,6 +260,7 @@
         width:100%;
         position:absolute;
         overflow:hidden;
+        background:white;
     }
     
     </style>
@@ -265,7 +297,6 @@
         <div id = "doodle">Doodle It!</div>
     </div>
     <div id = "drawScreen">
-        <div id = "back">Back</div>
         <div id = "fullStance"></div>
         <div id = "timer"></div>
         <div id = "done">Done</div>
@@ -336,7 +367,7 @@
                 }
                 
                 function showDoodleScreen(){
-                    $('#fullStance').html('Drawing '+candidates[currCandidateId]+"\'s stance on "+issues[currIssueId]);
+                    $('#fullStance').html('Drawing <span>'+candidates[currCandidateId]+"\'s</span> stance on <span>"+issues[currIssueId]+"</span");
                     $('#chooseScreen').hide();
                     $('#drawScreen').show();
                     startDoodleTimer();
@@ -344,10 +375,12 @@
                 
                 var timer;
                 function startDoodleTimer(){
-                    var time = 0;
+                    var time = 240;
+                    var minutes = time/60;
                     timer = setInterval(function(){
-                        time++;
-                        $('#timer').html(time);
+                        time--;
+                        minutes = Math.floor(time/60);
+                        $('#timer').html(minutes+":"+time%60);
                     },1000);
                 }
     });
