@@ -14,6 +14,7 @@
     <!--<script src="js/dropzone.js"></script>-->
     <!--<script src = "https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="js/sketch.js"></script>
     
     <style>@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
     
@@ -128,6 +129,17 @@
         margin: auto;
         color:#FE4841!important;
     }
+
+
+   #browserDraw{
+        display: block;
+        padding: 20px;
+        width: 180px;
+        text-align: center;
+        margin: auto;
+        color:#FE4841!important;
+    }
+
     
     #doodle{
         display: block;
@@ -297,9 +309,28 @@
     <div id = "drawScreen">
         <div id = "fullStance"></div>
         <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
+        <div id = "browserDraw">Or, draw in the browser</div>
         <div id = "timer"></div>
         <div id = "done">Done</div>
     </div>
+
+    <div id = "drawinBrowser">
+        <div id = "fullStance"></div>
+        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
+        <div id = "timer"></div>
+        <div id = "done">Done</div>
+        <!-- sketching in browser -->
+        <canvas id="simple_sketch" width="300" height="500"></canvas>
+        <script type="text/javascript">
+        $(function() {
+        $('#simple_sketch').sketch();
+        });
+        </script>
+        
+
+    </div>
+
+
     <div id = "shareScreen">
         <div id = "shareit">Share it!</div>
         <div id = "replay">Replay?</div>
