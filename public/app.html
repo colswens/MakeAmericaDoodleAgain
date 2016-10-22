@@ -195,6 +195,20 @@
         color: white;
         background:#FE4841;
     }
+
+     #doneDrawing{
+        margin-left:-45px;
+        left:50%;
+        text-align: center;
+        bottom:40px;
+        position: absolute;
+        padding: 20px;
+        background: black;
+        width: 60px;
+        border-radius: 60px;
+        color: white;
+        background:#FE4841;
+    }
     
     #replay{
         padding:20px;
@@ -306,19 +320,17 @@
         
         <div id = "doodle">Doodle It!</div>
     </div>
+
     <div id = "drawScreen">
         <div id = "fullStance"></div>
         <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
-        <div id = "browserDraw">Or, draw in the browser</div>
+        <div id = "OrDrawInBrowser">Or, draw in the browser</div>
         <div id = "timer"></div>
         <div id = "done">Done</div>
     </div>
 
     <div id = "drawinBrowser">
-        <div id = "fullStance"></div>
-        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
-        <div id = "timer"></div>
-        <div id = "done">Done</div>
+        
         <!-- sketching in browser -->
         <canvas id="simple_sketch" width="300" height="500"></canvas>
         <script type="text/javascript">
@@ -326,6 +338,7 @@
         $('#simple_sketch').sketch();
         });
         </script>
+        <div id = "doneDrawing">Done</div>
         
 
     </div>
@@ -358,6 +371,10 @@
                     showDoodleScreen(); 
                 });
                 
+                $('#doneDrawing').click(function(){
+                   ('#drawinBrowser').hide();
+                });
+
                 $('#done').click(function(){
                     showShareScreen(); 
                 });
@@ -369,6 +386,7 @@
                 var roulette;
                 
                 function showChooseScreen(){
+                    $('#drawinBrowser').hide();
                     $('#shareScreen').hide();
                     $('#chooseScreen').show();
                     $('#search').hide();
@@ -401,6 +419,14 @@
                     $('#chooseScreen').hide();
                     $('#drawScreen').show();
                     startDoodleTimer();
+                }
+
+                $("#OrDrawInBrowser").click(function(){
+                    showDoodleInBrowser();
+                });
+
+                function showDoodleInBrowser(){
+                    $('#drawinBrowser').show();
                 }
                 
                 var timer;
