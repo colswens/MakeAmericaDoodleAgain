@@ -35,9 +35,29 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:100px;
+        height:200px;
         font-size:40px;
         text-align:center;
+    }
+
+    #candidate[candidate="Hillary"]{
+        background:url('../img/clintons_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #candidate[candidate="Donald"]{
+        background:url('../img/trumps_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #candidate[candidate="Jill"]{
+        background:url('../img/steins_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #candidate[candidate="Gary"]{
+        background:url('../img/johnsons_face@2x.png') no-repeat center center;
+        background-size:contain;
     }
     
     
@@ -46,9 +66,12 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:100px;
+        height:80px;
         font-size:40px;
         text-align:center;
+        color:white;
+        margin-top:30px;
+        margin-bottom:0px;
     }
     
     #draw{
@@ -56,11 +79,15 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:100px;
+        height:10px;
         font-size:40px;
         text-align:center;
         font-weight:bold;
-        margin-top:50px;
+        margin-top:100px;
+        background:url('../img/doodle_title@2x.png') no-repeat center center;
+        background-size:contain;
+        padding: 20px 0px;
+        margin-bottom:40px;
     }
     
     #stance{
@@ -68,10 +95,15 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:100px;
+        height:10px;
         font-size:40px;
         text-align:center;
         font-weight:bold;
+        background:url('../img/stanceon_title@2x.png') no-repeat center center;
+        background-size:contain;
+        padding: 20px 0px;
+        margin-bottom:20px;
+        margin-top:20px;
     }
     
     #stop{
@@ -84,6 +116,7 @@
         background: black;
         line-height: 60px;
         color: white;
+        background:#FE4841;
     }
     
     #search{
@@ -143,37 +176,82 @@
     #shareit{
         padding:20px;
     }
+
+    #mainNav{
+        width:100%;
+        height:50px;
+        position:absolute;
+        z-index:100000;
+        background:#FE4841;
+    }
+
+    #logo{
+        position:absolute;
+        left:10px;
+        height:100%;
+        background:white;
+        width:30px;
+        background:url('../img/Simple_Logo_White.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #menu{
+        position:absolute;
+        right:10px;
+        height:100%;
+    }
+
+    #menu>div{
+        float:right;
+        margin:0px 10px;
+        line-height:50px;
+        color:white;
+    }
+
+    #purpleBG{
+        width:300%;
+        height:200%;
+        top:320px;
+        margin-left:-100%;
+        transform:rotate(15deg);
+        background:#472094;
+        position:absolute;
+        z-index:0;
+    }
+
+    #chooseScreen, #drawScreen, #shareScreen{
+        position:relative;
+        z-index:1;
+    }
+
+    #landingPage{
+        height:100%;
+        width:100%;
+        position:absolute;
+        overflow:hidden;
+    }
     
     </style>
 </head>
 <body>
-
-
-    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-
-    <script>
-    // Initialize Firebase
-    var config = {
-    apiKey: "AIzaSyBU2gpSPOXQud13jn_XfG499tmnuARIJdI",
-    authDomain: "makeamericadoodleagain.firebaseapp.com",
-    databaseURL: "https://makeamericadoodleagain.firebaseio.com",
-    storageBucket: "",
-    messagingSenderId: "26288147536"
-    };
-    firebase.initializeApp(config);
-
-    </script>
-
-
-
+    <div id = "landingPage">
+        <div id = "purpleBG"></div>
+        <nav id = "mainNav">
+            <div id = "logo"></div>
+            <div id = "menu">
+                <div id = "play">Play</div>
+                <div id = "about">About</div>
+            </div>
+        </nav>
+    </div>
     <div id = "chooseScreen">
-        <div id = "draw">Draw</div>
+        <div id = "draw"></div>
         
         <div id="candidate">
             
         </div>
         
-        <div id = "stance">stance on</div>
+        <div id = "stance"></div>
         
             
         <div id="issue">
@@ -199,6 +277,7 @@
     
     <script>
     var candidates = ['Hillary Clinton','Donald Trump','Jill Stein','Gary Johnson'];
+    var candidatesShort = ['Hillary','Donald','Jill','Gary'];
     var issues = ['Military Budget','Abortion','Black Lives Matter','Immigration','War on Drugs','Climate Change','Planned Parenthood','Gay Marriage'];
     currIssueId = 0;
     currCandidateId = 0;
@@ -225,10 +304,6 @@
                 $('#replay').click(function(){
                    showChooseScreen(); 
                 });
-
-                $('#shareit').click(function(){
-                showFacebookLogin(); 
-                });
                 
                 var roulette;
                 
@@ -250,7 +325,7 @@
                         if(currCandidateId > candidates.length-1){
                             currCandidateId = 0;
                         }
-                       $('#candidate').html(candidates[currCandidateId]+"\'s");
+                       $('#candidate').attr('candidate',candidatesShort[currCandidateId]);
                     },100);
                 }
                     
@@ -267,30 +342,6 @@
                     startDoodleTimer();
                 }
                 
-                var provider = new firebase.auth.FacebookAuthProvider();
-                function showFacebookLogin(){
-                firebase.auth().signInWithRedirect(provider);
-                firebase.auth().getRedirectResult().then(function(result) {
-                    if (result.credential) {
-                        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-                        var token = result.credential.accessToken;
-                        // ...
-                    }
-                    // The signed-in user info.
-                    var user = result.user;
-                }).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // The email of the user's account used.
-                    var email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    var credential = error.credential;
-                    // ...
-                });
-                }
-
-
                 var timer;
                 function startDoodleTimer(){
                     var time = 0;
