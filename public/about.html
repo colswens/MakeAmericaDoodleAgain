@@ -123,10 +123,11 @@
     #search{
         display: block;
         padding: 20px;
-        width: 180px;
+        width: 150px;
         text-align: center;
         margin: auto;
         color:#FE4841!important;
+        cont-size:30px;
     }
     
     #doodle{
@@ -166,8 +167,10 @@
     
     #timer{
         text-align:center;
+        padding:20px;
         font-size: 100px;
         color:white;
+        margin-top:120px;
     }
     
     #done{
@@ -254,18 +257,95 @@
     }
 
     #landingPage{
-        height:100%;
+        height:60%;
+        min-height:400px;
         width:100%;
-        position:absolute;
+        position:relative;
         overflow:hidden;
         background:white;
+    }
+
+    #video{
+        z-index:100;
+        position:relative;
+        width:100%;
+        height:80%;
+        overflow:hidden;
+    }
+
+    #player{
+        width: 100%;
+        height: 200%;
+        top: 0px;
+        margin-top: -25%;
+        min-height:500px;
+        min-width:800px;
+    }
+
+    #fullLogo{
+        position:absolute;
+        z-index:100;
+        width:200px;
+        height:200px;
+        top: 50%;
+        margin-top: -100px;
+        left:50%;
+        margin-left:-100px;
+        background:url('img/madaFullLogo.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #aboutText{
+        background:#472094 url('img/BG_Burple2.jpg') no-repeat center center;
+        background-size:cover;
+        width:100%;
+        position:relative;
+
+    }
+
+    #aboutTextInner{
+        width: 100%;
+        max-width: 600px;
+        color: white;
+        margin: auto;
+        padding:80px 40px;
+        box-sizing: border-box;
+    }
+
+    #aboutTextInner>h2{
+        text-align:center;
+        padding-bottom:20px;
+        font-family:oswald;
+        text-rendering:capitalize;
+        font-weight:normal;
+        font-size:40px;
+    }
+
+    #aboutTextInner>p{
+        font-weight:300;
+    }
+
+    #howTo{
+        position:relative;
+        width:100%;
+        height:60%;
+        padding:40px;
+        box-sizing:border-box;
+        background:white;
+        padding-bottom:100px;
+    }
+
+    #howToInner{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: white url(img/howToPlayMADA.png) no-repeat center center;
+        background-size: contain;
     }
     
     </style>
 </head>
 <body>
-    <div id = "landingPage">
-        <div id = "purpleBG"></div>
         <nav id = "mainNav">
             <div id = "logo"></div>
             <div id = "menu">
@@ -273,36 +353,20 @@
                 <a href = "about.html"><div id = "about">About</div></a>
             </div>
         </nav>
+    <div id = "video">
+        <div id = "fullLogo"></div>
+        <iframe id="player" frameborder="0" autoplay="1" loop="1" allowfullscreen="1" title="YouTube video player" width="100%" height="auto" src="https://www.youtube.com/embed/BoqeUDF6er0?autohide=1&autoplay=1&controls=0&enablejsapi=1&iv_load_policy=3&loop=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&wmode=opaque&origin=http%3A%2F%2Fsergio-burgos-hxkz.squarespace.com&widgetid=1" class="background-video ready"></iframe>
     </div>
-    <div id = "chooseScreen">
-        <div id = "draw"></div>
-        
-        <div id="candidate">
-            
+    <div id = "aboutText">
+        <div id = "aboutTextInner">
+            <h2>WE ARE #MADA</h2>
+            <p>
+                Based out of Portland, Event Horizon has, according to Canon Magazine, consistently produced music that "pushes the technical boundaries of what music could/should be." Vestibulum id ligula porta felis euismod semper. Photos by Ebru Yildiz. Portraits feature Ghastly City Sleep. Live shots feature The Psychic Paramount. Content for demo use only.
+            </p>
         </div>
-        
-        <div id = "stance"></div>
-        
-            
-        <div id="issue">
-            
-        </div>
-        
-        <div id = "stop">Stop</div>
-        
-        <a target="_BLANK" id = "search" href = "google.com">What is their stance?</a>
-        
-        <div id = "doodle">Doodle It!</div>
     </div>
-    <div id = "drawScreen">
-        <div id = "fullStance"></div>
-        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
-        <div id = "timer"></div>
-        <div id = "done">Done</div>
-    </div>
-    <div id = "shareScreen">
-        <div id = "shareit">Share it!</div>
-        <div id = "replay">Replay?</div>
+    <div id = "howTo">
+        <div id = "howToInner"></div>
     </div>
     
     <script>
@@ -313,6 +377,7 @@
     currCandidateId = 0;
     $(document).ready(function(){
                 
+                $('#player').css('margin-top',-$('#player').parent().height()/4);
                 
                 showChooseScreen();
                 
