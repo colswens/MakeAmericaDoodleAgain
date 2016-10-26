@@ -472,10 +472,9 @@
                 showFbDialogue(); 
                 });
 
-                console.log(showFbDialogue);
-
                 function showFbDialogue(){
                     document.getElementById('shareit').onclick = function() {
+                        console.log('You clicked share on Facebook');
                         FB.ui({
                             method: 'share',
                             mobile_iframe: true,
