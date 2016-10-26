@@ -470,7 +470,7 @@
                         url:"doodle"
                     });
                     var key = newPostRef.key;
-                    //window.key = key;
+                    window.key = key;
 
                     var canvas = document.getElementById("simple_sketch");
                    //var dt = canvas.toDataURL('image/png');
@@ -527,12 +527,12 @@
                 });
 
                 function showFbDialogue(){
-                    console.log(key);
+                    console.log(window.key);
                     FB.ui({
                         method: 'feed',
                         mobile_iframe: true,
                         link: 'https://www.makeamericadoodleagain.com',
-                        picture: 'https://www.makeamericadoodleagain.com/doodle.html#'+key,
+                        picture: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.key,
                       }, function(response){});              
                 }
 
