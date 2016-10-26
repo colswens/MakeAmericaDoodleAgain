@@ -389,6 +389,20 @@
         <div id = "shareit">Share it!</div>
         <div id = "replay">Replay?</div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+
+    <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyBU2gpSPOXQud13jn_XfG499tmnuARIJdI",
+    authDomain: "makeamericadoodleagain.firebaseapp.com",
+    databaseURL: "https://makeamericadoodleagain.firebaseio.com",
+    storageBucket: "",
+    messagingSenderId: "26288147536"
+    };
+    firebase.initializeApp(config);
+    </script>
     
     <script>
     var candidates = ['Hillary Clinton','Donald Trump','Jill Stein','Gary Johnson'];
@@ -422,8 +436,23 @@
                 function doneDrawing(){
                    $('#drawinBrowser').hide();
                    var canvas = document.getElementById("simple_sketch");
-                   var dt = canvas.toDataURL('image/jpeg');
-                   this.href = dt;
+                   //var dt = canvas.toDataURL('image/png');
+                   var dt = canvas.toBlob('image/png');
+                   //this.href = dt;
+
+                   var storageRef = firebase.storage.ref().child("doodles/doodle.png");
+
+                   var firstFile = dt;
+                   var uploadTask = storageRef.put(firstFile).then(function(snapshot){/*dosomething*/});
+                   /*
+                    var storageRef = firebase.storage.ref("folderName/file.jpg");
+                    var fileUpload = document.getElementById("fileUpload");
+                    fileUpload.on(‘change’, function(evt) {
+                      //var firstFile = evt.target.file[0]; // get the first file uploaded
+                      var firstFile = dt;
+                      var uploadTask = storageRef.put(firstFile);
+                    });*/
+
                 };
 
                 document.getElementById('doneDrawing').addEventListener('click',doneDrawing,false);
