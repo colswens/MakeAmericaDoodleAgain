@@ -527,7 +527,7 @@
                 function showFbDialogue(){
                     console.log('You clicked share on Facebook');
                     FB.ui({
-                        method: 'share',
+                        method: 'feed',
                         mobile_iframe: true,
                         href: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.key,
                       }, function(response){});              
