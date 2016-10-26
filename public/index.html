@@ -323,8 +323,6 @@
         position: absolute;
         left: 50%;
         margin-left: -150px;
-        width:300px!important;
-        height:500px!important;
     }
     
     </style>
@@ -398,6 +396,10 @@
     currCandidateId = 0;
     $(document).ready(function(){
                 
+                var canvas = document.getElementById("simple_sketch");
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
                 showChooseScreen();
                 
@@ -415,9 +417,6 @@
                 function doneDrawing(){
                    $('#drawinBrowser').hide();
                    var canvas = document.getElementById("simple_sketch");
-                   var ctx = canvas.getContext("2d");
-                   ctx.fillStyle = "white";
-                   ctx.fillRect(0, 0, canvas.width, canvas.height);
                    var dt = canvas.toDataURL('image/jpeg');
                    this.href = dt;
                 };
