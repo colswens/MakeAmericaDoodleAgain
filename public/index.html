@@ -468,6 +468,7 @@
                         url:"doodle"
                     });
                     var key = newPostRef.key;
+                    window.key = key;
 
                     var canvas = document.getElementById("simple_sketch");
                    //var dt = canvas.toDataURL('image/png');
@@ -528,7 +529,7 @@
                     FB.ui({
                         method: 'share',
                         mobile_iframe: true,
-                        href: 'https://www.makeamericadoodleagain.com/doodle.html#'+key,
+                        href: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.key,
                       }, function(response){});              
                 }
 
