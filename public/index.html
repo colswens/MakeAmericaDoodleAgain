@@ -1,70 +1,505 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome to Firebase Hosting</title>
-    <style link = "../bootstrap/bootstrap.min.css"></style>
-    <style media="screen">
-      body {
-        font-family: Roboto, Arial, sans-serif;
-        background: #ECEFF1;
-        color: rgba(0,0,0,0.87);
-      }
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Oswald" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Make America Doodle Again</title>
+    <script src="https://fb.me/react-0.14.7.min.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.min.js"></script>
+    <!--<script src="https://unpkg.com/react@15.3.2/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js"></script>
+    <!--<script src="js/dropzone.js"></script>-->
+    <!--<script src = "https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="js/sketch.js"></script>
+    
+    <style>@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
+    
+    body,html{
+        font-family:helvetica;
+        background:#472094;
+        width:100%;
+        height:100%;
+        position:absolute;
+        margin:0px;
+        overflow-x:hidden;
+        overflow-y:visible;
+        font-family:open sans;
+    }
+    
+    
+    
+    #candidate{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        height:200px;
+        font-size:40px;
+        text-align:center;
+    }
 
-      a {
-        color: rgb(3,155,229);
-      }
+    #candidate[candidate="Hillary"]{
+        background:url('img/clintons_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
 
-      #message {
-        max-width: 400px;
-        margin: 40px auto;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-        border-radius: 2px;
-        background: white;
-        padding: 16px 24px;
-      }
+    #candidate[candidate="Donald"]{
+        background:url('img/trumps_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
 
-      #message h1 {
-        font-size: 22px;
-        font-weight: 500;
+    #candidate[candidate="Jill"]{
+        background:url('img/steins_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #candidate[candidate="Gary"]{
+        background:url('img/johnsons_face@2x.png') no-repeat center center;
+        background-size:contain;
+    }
+    
+    
+    #issue{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        height:80px;
+        font-size:40px;
+        text-align:center;
+        color:white;
+        margin-top:30px;
+        margin-bottom:0px;
+    }
+    
+    #draw{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        height:10px;
+        font-size:40px;
+        text-align:center;
+        font-weight:bold;
+        margin-top:100px;
+        background:url('img/doodle_title@2x.png') no-repeat center center;
+        background-size:contain;
+        padding: 20px 0px;
+        margin-bottom:40px;
+    }
+    
+    #stance{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        height:10px;
+        font-size:40px;
+        text-align:center;
+        font-weight:bold;
+        background:url('img/stanceon_title@2x.png') no-repeat center center;
+        background-size:contain;
+        padding: 20px 0px;
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+    
+    #stop{
+        margin: auto;
+        display: block;
+        width: 60px;
         text-align: center;
-        margin: 0 0 16px;
-      }
-
-      #message p {
-        font-weight: 300;
-        line-height: 150%;
-      }
-
-      #message ul {
-        list-style: none;
-        margin: 16px 0 0;
-        padding: 0;
-        text-align: center;
-      }
-
-      #message li a {
-        display: inline-block;
-        padding: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        font-weight: 500;
-        background: rgb(3,155,229);
+        height: 60px;
+        border-radius: 100px;
+        background: black;
+        line-height: 60px;
         color: white;
-        border: 1px solid rgb(3,155,229);
-        border-radius: 3px;
-        font-size: 14px;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-      }
+        background:#FE4841;
+    }
+    
+    #search{
+        display: block;
+        padding: 20px;
+        width: 180px;
+        text-align: center;
+        margin: auto;
+        color:#FE4841!important;
+    }
+
+
+   #browserDraw{
+        display: block;
+        padding: 20px;
+        width: 180px;
+        text-align: center;
+        margin: auto;
+        color:#FE4841!important;
+    }
+
+    
+    #doodle{
+        display: block;
+        padding: 20px;
+        width: 150px;
+        text-align: center;
+        margin: auto;
+        background: #FE4841;
+        border-radius: 100px;
+        margin-top: 20px;
+        color: white;
+    }
+    
+    #fullStance{
+        text-align: center;
+        margin: auto;
+        max-width: 300px;
+        width: 100%;
+        font-size: 40px;
+        background: #FE4841;
+        padding: 20px;
+        color: white;
+        position:relative;
+        top:100px;
+        font-style:italic;
+    }
+
+    #fullStance>span{
+        font-weight:bold;
+        font-style:normal;
+    }
+    
+    #back{
+        padding:20px;
+    }
+    
+    #timer{
+        text-align:center;
+        font-size: 80px;
+        margin-bottom:70px;
+        color:white;
+    }
+    
+    #done{
+        margin:auto;
+        text-align: center;
+        bottom:40px;
+        position: relative;
+        padding: 20px;
+        width: 60px;
+        border-radius: 60px;
+        color: white;
+        background:#FE4841;
+    }
+
+     #doneDrawing{
+        margin-left:-45px;
+        left:50%;
+        text-align: center;
+        bottom:40px;
+        position: absolute;
+        padding: 20px;
+        background: black;
+        width: 60px;
+        border-radius: 60px;
+        color: white;
+        background:#FE4841;
+    }
+
+     #doneDrawing{
+        margin-left:-45px;
+        left:50%;
+        text-align: center;
+        bottom:40px;
+        position: absolute;
+        padding: 20px;
+        background: black;
+        width: 60px;
+        border-radius: 60px;
+        color: white;
+        background:#FE4841;
+    }
+    
+    #replay{
+        padding:20px;
+        margin:20px auto;
+        background:#FE4841;
+        color:white;
+        border-radius:50px;
+        width:100px;
+        text-align:center;
+    }
+    
+    #shareit{
+        padding:20px;
+        margin:auto;
+        background:#FE4841;
+        color:white;
+        border-radius:50px;
+        width:100px;
+        text-align:center;
+        margin-top:100px;
+    }
+
+    #mainNav{
+        width:100%;
+        height:50px;
+        position:absolute;
+        z-index:100000;
+        background:#FE4841;
+    }
+
+    #logo{
+        position:absolute;
+        left:10px;
+        height:100%;
+        background:white;
+        width:30px;
+        background:url('img/Simple_Logo_White.png') no-repeat center center;
+        background-size:contain;
+    }
+
+    #menu{
+        position:absolute;
+        right:10px;
+        height:100%;
+    }
+
+    #menu>a>div{
+        float:right;
+        margin:0px 10px;
+        line-height:50px;
+        color:white!important;
+    }
+
+    #purpleBG{
+        width:300%;
+        height:200%;
+        top:320px;
+        margin-left:-100%;
+        transform:rotate(15deg);
+        background:#472094;
+        position:absolute;
+        z-index:0;
+    }
+
+    #chooseScreen, #drawScreen, #shareScreen{
+        position:relative;
+        z-index:1;
+        height:100%;
+    }
+
+    #landingPage{
+        height:100%;
+        width:100%;
+        position:absolute;
+        overflow:hidden;
+        background:white;
+    }
+
+    #OrDrawInBrowser{
+        margin:auto;
+        color:#FE4841;
+        text-align:center;
+    }
+
+    #drawinBrowser{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0px;
+            z-index: 100000;
+            background:rgba(0,0,0,.9);
+    }
+
+    #simple_sketch{
+        top:20px;
+        background: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,.2);
+        margin: auto;
+        position: absolute;
+        left: 50%;
+        margin-left: -150px;
+        width:300px!important;
+        height:500px!important;
+    }
+    
     </style>
-  </head>
-  <body>
-    <div id="message">
-      <h1>Welcome to Firebase Hosting</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <ul>
-        <li><a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a></li>
-      </ul>
+</head>
+<body>
+    <div id = "landingPage">
+        <div id = "purpleBG"></div>
+        <nav id = "mainNav">
+            <div id = "logo"></div>
+            <div id = "menu">
+                <a href = "app.html"><div id = "play">Play</div></a>
+                <a href = "about.html"><div id = "about">About</div></a>
+            </div>
+        </nav>
     </div>
-  </body>
+    <div id = "chooseScreen">
+        <div id = "draw"></div>
+        
+        <div id="candidate">
+            
+        </div>
+        
+        <div id = "stance"></div>
+        
+            
+        <div id="issue">
+            
+        </div>
+        
+        <div id = "stop">Stop</div>
+        
+        <a target="_BLANK" id = "search" href = "google.com">What is their stance?</a>
+        
+        <div id = "doodle">Doodle It!</div>
+    </div>
+
+    <div id = "drawScreen">
+        <div id = "fullStance"></div>
+        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
+        <div id = "OrDrawInBrowser">Or, draw in the browser</div>
+        <div id = "timer">4:00</div>
+        <div id = "done">Done</div>
+    </div>
+
+    <div id = "drawinBrowser">
+        
+        <!-- sketching in browser -->
+        <canvas id="simple_sketch" width="300" height="500"></canvas>
+        <script type="text/javascript">
+        $(function() {
+        $('#simple_sketch').sketch();
+        });
+        </script>
+        <a download="doodle.jpg" id = "doneDrawing">Done</a>
+
+        
+
+    </div>
+
+
+    <div id = "shareScreen">
+        <div id = "shareit">Share it!</div>
+        <div id = "replay">Replay?</div>
+    </div>
+    
+    <script>
+    var candidates = ['Hillary Clinton','Donald Trump','Jill Stein','Gary Johnson'];
+    var candidatesShort = ['Hillary','Donald','Jill','Gary'];
+    var issues = ['Military Budget','Abortion','Black Lives Matter','Immigration','War on Drugs','Climate Change','Planned Parenthood','Gay Marriage'];
+    currIssueId = 0;
+    currCandidateId = 0;
+    $(document).ready(function(){
+                
+                
+                showChooseScreen();
+                
+                $("#stop").click(function(){
+                    $("#stop").hide();
+                    clearInterval(roulette);
+                    $('#search').attr('href','http://www.google.com?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]).show();
+                    $('#doodle').show();
+                });
+                
+                $('#doodle').click(function(){
+                    showDoodleScreen(); 
+                });
+                
+                function doneDrawing(){
+                   $('#drawinBrowser').hide();
+                   var canvas = document.getElementById("simple_sketch");
+                   var ctx = canvas.getContext("2d");
+                   ctx.fillStyle = "white";
+                   ctx.fillRect(0, 0, canvas.width, canvas.height);
+                   var dt = canvas.toDataURL('image/jpeg');
+                   this.href = dt;
+                };
+
+                document.getElementById('doneDrawing').addEventListener('click',doneDrawing,false);
+
+                $('#done').click(function(){
+                    showShareScreen(); 
+
+                });
+                
+                $('#replay').click(function(){
+                   showChooseScreen(); 
+                });
+                
+                var roulette;
+                
+                function showChooseScreen(){
+                    $('#drawinBrowser').hide();
+                    $('#shareScreen').hide();
+                    $('#chooseScreen').show();
+                    $('#search').hide();
+                    $('#doodle').hide();
+                    $('#drawScreen').hide();
+                    $('#shareScreen').hide();
+                    $("#stop").show();
+                    roulette = setInterval(function(){
+                        currIssueId++;
+                        if(currIssueId > issues.length-1){
+                            currIssueId = 0;
+                        }
+                       $('#issue').html(issues[currIssueId]);
+                       currCandidateId++;
+                        if(currCandidateId > candidates.length-1){
+                            currCandidateId = 0;
+                        }
+                       $('#candidate').attr('candidate',candidatesShort[currCandidateId]);
+                    },100);
+                }
+                    
+                function showShareScreen(){
+                    $('#drawScreen').hide();
+                    $('#shareScreen').show();
+                    clearInterval(timer);
+                }
+                
+                function showDoodleScreen(){
+                    $('#fullStance').html('Drawing <span>'+candidates[currCandidateId]+"\'s</span> stance on <span>"+issues[currIssueId]+"</span");
+                    $('#chooseScreen').hide();
+                    $('#drawScreen').show();
+                    startDoodleTimer();
+                }
+
+                $("#OrDrawInBrowser").click(function(){
+                    showDoodleInBrowser();
+                });
+
+                function showDoodleInBrowser(){
+                    $('#drawinBrowser').show();
+                }
+                
+                var timer;
+                function startDoodleTimer(){
+                    var time = 240;
+                    var minutes = time/60;
+                    timer = setInterval(function(){
+                        if(time<0){
+                            clearInterval(timer);
+                            return;
+                        }
+                        time--;
+                        minutes = Math.floor(time/60);
+                        $('#timer').html(minutes+":"+time%60);
+                    },1000);
+                }
+    });
+            
+    </script>
+        
+</body>
 </html>
+
+
+
+
