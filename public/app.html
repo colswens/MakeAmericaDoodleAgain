@@ -377,6 +377,7 @@
         });
         </script>
         <div id = "doneDrawing">Done</div>
+
         
 
     </div>
@@ -411,10 +412,14 @@
                 
                 $('#doneDrawing').click(function(){
                    $('#drawinBrowser').hide();
+                   var canvas = document.getElementById("simple_sketch");
+                   var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                   window.location.href = image;
                 });
 
                 $('#done').click(function(){
                     showShareScreen(); 
+
                 });
                 
                 $('#replay').click(function(){
