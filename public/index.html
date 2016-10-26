@@ -467,6 +467,20 @@
                 $('#replay').click(function(){
                    showChooseScreen(); 
                 });
+
+                $('#shareit').click(function(){
+                showFbDialogue(); 
+                });
+
+
+                document.getElementById('shareit').onclick = function() {
+                FB.ui({
+                method: 'share',
+                mobile_iframe: true,
+                href: 'https://developers.facebook.com/docs/',
+                }, function(response){});              
+                }
+
                 
                 var roulette;
                 
@@ -498,7 +512,7 @@
                     $('#shareScreen').show();
                     clearInterval(timer);
                 }
-                
+
                 function showDoodleScreen(){
                     $('#fullStance').html('Drawing <span>'+candidates[currCandidateId]+"\'s</span> stance on <span>"+issues[currIssueId]+"</span");
                     $('#chooseScreen').hide();
