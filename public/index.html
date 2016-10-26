@@ -480,7 +480,7 @@
                     var uploadTask = storageRef.put(firstFile).then(function(snapshot){
 
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
-                            console.log(url);
+                            console.log(key);
                             newPostRef.set({
                                 url:key,
                                 fullURL:url
@@ -525,7 +525,7 @@
                 });
 
                 function showFbDialogue(){
-                    console.log('(window.key)');
+                    console.log('(key)');
                     FB.ui({
                         method: 'feed',
                         mobile_iframe: true,
