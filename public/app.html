@@ -376,7 +376,7 @@
         $('#simple_sketch').sketch();
         });
         </script>
-        <div id = "doneDrawing">Done</div>
+        <a download="doodle.jpg" id = "doneDrawing">Done</a>
 
         
 
@@ -410,12 +410,14 @@
                     showDoodleScreen(); 
                 });
                 
-                $('#doneDrawing').click(function(){
+                function doneDrawing(){
                    $('#drawinBrowser').hide();
                    var canvas = document.getElementById("simple_sketch");
-                   var image = canvas.toDataURL("image/png");
-                   window.location.href = image;
-                });
+                   var dt = canvas.toDataURL('image/jpeg');
+                   this.href = dt;
+                };
+
+                document.getElementById('doneDrawing').addEventListener('click',doneDrawing,false);
 
                 $('#done').click(function(){
                     showShareScreen(); 
