@@ -472,14 +472,25 @@
                     var canvas = document.getElementById("simple_sketch");
                    //var dt = canvas.toDataURL('image/png');
                    var dt = canvas.toBlob(function(blob){
-                    var storageRef = firebase.storage().ref().child("doodles/"+key+".png");
 
+                    var storageRef = firebase.storage().ref().child("doodles/"+key+".png");
+                    
                     var firstFile = blob;
                     var uploadTask = storageRef.put(firstFile).then(function(snapshot){
-                        newPostRef.set({
-                            url:key
+
+                        var thisUrl = storageRef.getDownloadURL().then(function(url){
+                            console.log(url);
+                            newPostRef.set({
+                                url:key,
+                                fullURL:url
+                            });
                         });
+
+                        
                     });
+
+
+
                    },'image/png');
 
 

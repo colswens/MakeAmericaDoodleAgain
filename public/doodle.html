@@ -344,13 +344,10 @@
 
     firebase.initializeApp(config);
 
-    var hash = window.location.hash;
+    var hash = String(window.location.hash).replace('#','');
 
-    var storageRef = firebase.storage().ref("doodles/"+hash+".png").getDownloadURL().then(function(url) {
-        
-        var thisurl = decodeURIComponent(url);
-        console.log(thisurl);
-      $('#image').attr('src',thisurl);
+    var storageRef = firebase.storage().ref("doodles").child(hash+".png").getDownloadURL().then(function(url) {
+      $('#image').attr('src',url);
     }).catch(function(error) {
       // Handle any errors
     });
