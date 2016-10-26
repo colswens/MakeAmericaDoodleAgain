@@ -323,6 +323,8 @@
         position: absolute;
         left: 50%;
         margin-left: -150px;
+        width:300px!important;
+        height:500px!important;
     }
     
     </style>
@@ -413,7 +415,7 @@
                 
                 function doneDrawing(){
                    $('#drawinBrowser').hide();
-                   $('simple_sketch').download('jpg');
+                   $('#simple_sketch').download('jpg');
                    /*var canvas = document.getElementById("simple_sketch");
                    var dt = canvas.toDataURL('image/jpeg');
                    this.href = dt;*/
