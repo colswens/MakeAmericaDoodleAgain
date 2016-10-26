@@ -420,7 +420,7 @@
     apiKey: "AIzaSyBU2gpSPOXQud13jn_XfG499tmnuARIJdI",
     authDomain: "makeamericadoodleagain.firebaseapp.com",
     databaseURL: "https://makeamericadoodleagain.firebaseio.com",
-    storageBucket: "",
+    storageBucket: 'gs://makeamericadoodleagain.appspot.com/',
     messagingSenderId: "26288147536"
     };
     firebase.initializeApp(config);
@@ -457,14 +457,28 @@
                 
                 function doneDrawing(){
                    $('#drawinBrowser').hide();
-                   var canvas = document.getElementById("simple_sketch");
+                   
+                   var postListRef = firebase.database().ref('doodles');
+                   var newPostRef = postListRef.push();
+                    newPostRef.set({
+                        url:"doodle"
+                    });
+                    var key = newPostRef.key;
+
+                    var canvas = document.getElementById("simple_sketch");
                    //var dt = canvas.toDataURL('image/png');
                    var dt = canvas.toBlob(function(blob){
-                    var storageRef = firebase.storage.ref().child("doodles/doodle.png");
+                    var storageRef = firebase.storage().ref().child("doodles/"+key+".png");
 
                     var firstFile = blob;
-                    var uploadTask = storageRef.put(firstFile).then(function(snapshot){/*dosomething*/});
+                    var uploadTask = storageRef.put(firstFile).then(function(snapshot){
+                        newPostRef.set({
+                            url:key
+                        });
+                    });
                    },'image/png');
+
+
                    //this.href = dt;
 
                    
