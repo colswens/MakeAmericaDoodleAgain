@@ -437,13 +437,15 @@
                    $('#drawinBrowser').hide();
                    var canvas = document.getElementById("simple_sketch");
                    //var dt = canvas.toDataURL('image/png');
-                   var dt = canvas.toBlob('image/png');
+                   var dt = canvas.toBlob(function(blob){
+                    var storageRef = firebase.storage.ref().child("doodles/doodle.png");
+
+                    var firstFile = blob;
+                    var uploadTask = storageRef.put(firstFile).then(function(snapshot){/*dosomething*/});
+                   },'image/png');
                    //this.href = dt;
 
-                   var storageRef = firebase.storage.ref().child("doodles/doodle.png");
-
-                   var firstFile = dt;
-                   var uploadTask = storageRef.put(firstFile).then(function(snapshot){/*dosomething*/});
+                   
                    /*
                     var storageRef = firebase.storage.ref("folderName/file.jpg");
                     var fileUpload = document.getElementById("fileUpload");
