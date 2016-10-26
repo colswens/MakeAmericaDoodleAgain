@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Oswald" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:image" content="https://www.makeamericadoodleagain.com/doodle.html?id=<?php echo $_GET["name"]; ?>"/>
+    <meta property="og:image" content=<?php echo "https://www.makeamericadoodleagain.com/doodle.html?id=".$_GET['name']; ?> />
     <meta property="og:description"    content="Politics Illustrated." />
     <title>Make America Doodle Again</title>
     <script src="https://fb.me/react-0.14.7.min.js"></script>
@@ -330,14 +330,33 @@
     </style>
 </head>
 <body>
-    <script type="text/javascript">
-        window.hash = "<?=$_POST['id']?>"; // That's for a string
-    </script>
     <img id = "image" style = "margin:auto; display:block; margin-top:50px; background:white;"></div>
 
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
 
     <script>
+
+    function getQueryParams(qs) {
+        qs = qs.split('+').join(' ');
+
+        var params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+
+        while (tokens = re.exec(qs)) {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
+    }
+
+    var query = getQueryParams(document.location.search);
+
+    var hash = query.id;
+
+    console.log(hash);
+
+
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyBU2gpSPOXQud13jn_XfG499tmnuARIJdI",
@@ -350,7 +369,10 @@
     firebase.initializeApp(config);
 
     //var hash = String(window.location.hash).replace('#','');
-    var hash = window.hash;
+
+    
+
+    
 
     var storageRef = firebase.storage().ref("doodles").child(hash+".png").getDownloadURL().then(function(url) {
       $('#image').attr('src',url);
