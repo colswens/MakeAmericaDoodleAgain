@@ -482,12 +482,14 @@
                     var uploadTask = storageRef.put(firstFile).then(function(snapshot){
 
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
-                            console.log(key);
+                            console.log(url);
                             newPostRef.set({
                                 url:key,
                                 fullURL:url
                             });
                         });
+
+                        window.url = url;
 
                         
                     });
@@ -527,12 +529,12 @@
                 });
 
                 function showFbDialogue(){
-                    console.log(window.key);
+                    console.log(window.url);
                     FB.ui({
                         method: 'feed',
                         mobile_iframe: true,
-                        link: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.key,
-                        picture: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.key,
+                        link: 'https://www.makeamericadoodleagain.com'
+                        picture: 'https://www.makeamericadoodleagain.com/doodle.html#'+window.url,
                         caption: 'test testtest'
                       }, function(response){});              
                 }
