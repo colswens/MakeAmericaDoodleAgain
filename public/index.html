@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:image" content="window.url"/>
     <meta property="og:description"    content="Politics Illustrated." />
+    <meta property="og:image:width"    content="600px" />
+    <meta property="og:image:height"    content="1000px" />
     <title>Make America Doodle Again</title>
     <script src="https://fb.me/react-0.14.7.min.js"></script>
     <script src="https://fb.me/react-dom-0.14.7.min.js"></script>
@@ -398,7 +400,7 @@
     <div id = "drawinBrowser">
         
         <!-- sketching in browser -->
-        <canvas id="simple_sketch" width="600" height="1000"></canvas>
+        <canvas id="simple_sketch" width="300" height="500"></canvas>
         <script type="text/javascript">
         $(function() {
         $('#simple_sketch').sketch();
@@ -536,6 +538,7 @@
                         mobile_iframe: true,
                         link: 'https://www.makeamericadoodleagain.com',
                         picture: window.url,
+
                         caption: 'test testtest'
                       }, function(response){});              
                 }
