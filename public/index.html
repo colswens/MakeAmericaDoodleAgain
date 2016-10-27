@@ -483,10 +483,10 @@
 
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
                             console.log(url);
+                            window.url = url;
                             newPostRef.set({
                                 url:key,
                                 fullURL:url
-                            window.url = url;
                             });
                         });
 
