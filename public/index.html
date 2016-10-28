@@ -332,6 +332,29 @@
         width:300px!important;
         height:500px!important;
     }
+
+    #doodleUploadWrap {
+        position: relative;
+        overflow: hidden;
+        background: #FE4841;
+        border-radius: 100px;
+        margin: 10px auto;
+        padding: 10px;
+        width: 160px;
+        text-align: center;
+    }
+    #doodleUploadWrap input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
     
     </style>
 </head>
@@ -394,6 +417,9 @@
         <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
         <div id = "OrDrawInBrowser">Or, draw in the browser</div>
         <div id = "timer">4:00</div>
+        <div id="doodleUploadWrap">Upload Doodle
+            <input id="doodleUpload" type = "file"/>
+        </div>
         <div id = "done">Done</div>
     </div>
 
@@ -465,7 +491,9 @@
 
                 function doneDrawing(){
                    $('#drawinBrowser').hide();
-                   
+                   if(window.doodleFileUpload){
+                    console.log('good to go!!!!!!!');
+                   }
                    var postListRef = firebase.database().ref('doodles');
                    var newPostRef = postListRef.push();
                     newPostRef.set({
@@ -475,12 +503,19 @@
                     window.key = key;
 
                     var canvas = document.getElementById("simple_sketch");
-                   //var dt = canvas.toDataURL('image/png');
-                   var dt = canvas.toBlob(function(blob){
+                    //var dt = canvas.toDataURL('image/png');
+                    var dt = canvas.toBlob(function(blob){
+
+                    
 
                     var storageRef = firebase.storage().ref().child("doodles/"+key+".png");
                     
                     var firstFile = blob;
+
+                    if(window.doodleFileUpload){
+                        firstFile = window.doodleFileUpload;
+                    }
+
                     var uploadTask = storageRef.put(firstFile).then(function(snapshot){
 
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
@@ -568,6 +603,15 @@
                        $('#candidate').attr('candidate',candidatesShort[currCandidateId]);
                     },100);
                 }
+
+                var inputElement = document.getElementById('doodleUpload');
+                inputElement.onchange = function(event) {
+                   var fileList = inputElement.files;
+                   window.doodleFileUpload = fileList[0];
+                   doneDrawing();
+                   //TODO do something with fileList.  
+                }
+
                     
                 function showShareScreen(){
                     $('#drawScreen').hide();
