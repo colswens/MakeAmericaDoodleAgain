@@ -48,7 +48,7 @@
         height:160px;
         font-size:40px;
         text-align:center;
-        margin-top:40px;
+        margin-top:60px;
         border:3px solid #492E8D;
         border-radius:200px;
     }
@@ -117,7 +117,7 @@
         font-size:30px;
         text-align:center;
         color:#FE4841;
-        margin-top:40px;
+        margin-top:10px;
         margin-bottom:0px;
     }
 
@@ -130,7 +130,7 @@
         font-size:30px;
         text-align:center;
         color:#FE4841;
-        margin-top:30px;
+        margin-top:10px;
         margin-bottom:0px;
     }
     
@@ -139,12 +139,11 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:10px;
+        height:50px;
         font-size:50px;
         text-align:center;
         margin-top:10px;
-        padding: 20px 0px;
-        margin-bottom:40px;
+        margin-bottom:0px;
         color:#492E8D;
     }
     
@@ -153,12 +152,11 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:10px;
+        height:50px;
         font-size:50px;
         text-align:center;
-        padding: 20px 0px;
-        margin-bottom:20px;
-        margin-top:0px;
+        margin-top:10px;
+        margin-bottom:0px;
         color:#492E8D;
     }
     
@@ -180,19 +178,43 @@
     #search{
         display: block;
         padding: 20px;
-        width: 180px;
+        width: 140px;
         text-align: center;
         margin: auto;
-        color:#FE4841!important;
+        margin-top:30px;
+        color:#492E8D!important;
+        position:relative;
+        text-decoration:none!important;
+    }
+
+    #search>div{
+        background: #FE4841;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        display:none;
+    }
+
+    #search>p{
+        margin:0px;
+        position:relative;
+        margin:0px;
+        z-index:100;
     }
 
     #search2{
         display: block;
         padding: 20px;
-        width: 180px;
+        width: 140px;
         text-align: center;
         margin: auto;
-        color:#FE4841!important;
+        margin-top:30px;
+        color:#492E8D!important;
+        position:relative;
+        text-decoration:none!important;
     }
 
 
@@ -272,7 +294,7 @@
     }
 
      #doneDrawing{
-        margin-left:-45px;
+        margin-left:-185px;
         left:50%;
         text-align: center;
         bottom:40px;
@@ -283,6 +305,21 @@
         border-radius: 60px;
         color: white;
         background:#492E8D;
+        font-size: 30px;
+    }
+
+    #clearDoodle{
+        margin-left: -50px;
+        left: 50%;
+        text-align: center;
+        bottom: 40px;
+        position: absolute;
+        padding: 20px;
+        background: black;
+        width: 200px;
+        border-radius: 60px;
+        color: white;
+        background: #FE4841;
         font-size: 30px;
     }
 
@@ -347,13 +384,15 @@
 
     #menu.active{
         width:200px;
+        padding-right:25px;
     }
 
     #menu>a>div{
         float:right;
         margin:0px 10px;
         line-height:50px;
-        color:white!important;
+        color:#472094!important;
+        font-size:20px;
     }
 
     #purpleBG{
@@ -506,6 +545,64 @@
         position:absolute;
     }
 
+    #instructions{
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        color: white;
+        font-size: 25px;
+        line-height: 43px;
+        text-align: center;
+        cursor: pointer;
+        background: white;
+        border: 2px solid red;
+        color: red;
+        background: white;
+        margin-bottom: -40px;
+        left: 50%;
+        margin-left: 40px;
+        z-index: 1000;
+        position: absolute;
+    }
+
+    #doodleInstructions{
+        width:300px;
+        border:2px solid #472094;
+        padding:20px;
+        box-sizing:border-box;
+        left:50%;
+        margin-left:-150px;
+        top:120%;
+        position:fixed;
+        opacity:0;
+        background:white;
+        z-index:10000000000000;
+        color:#472094;
+        transition: all .6s;
+    }
+
+    #doodleInstructionsBG{
+        background: rgba(255,255,255,.9);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 10000000;
+        opacity: 0;
+        pointer-events: none;
+        top: 0px;
+        transition: all .6s;
+    }
+
+    #doodleInstructionsBG.active{
+        opacity:1;
+        pointer-events: auto;
+    }
+
+    #doodleInstructions.active{
+        top:30%;
+        opacity:1;
+    }
+
     @media screen and (max-width: 500px) {
         #stop {
             width:100%;
@@ -550,6 +647,19 @@
             margin:0px;
             box-sizing:border-box;
             line-height: 22px;
+        }
+
+        #clearDoodle{
+            position: fixed;
+            bottom: 70px;
+            left: 10px;
+            border-radius: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            line-height: 22px;
+            font-size: 20px;
+            padding: 10px;
+            width: 150px;
         }
     }
 
@@ -609,7 +719,7 @@
         
         <div id = "stop">Stop</div>
         
-        <a target="_BLANK" id = "search" href = "google.com">Learn More?</a>
+        <a target="_BLANK" id = "search" href = "google.com"><p>Learn About This</p><div></div></a>
         
         <div id = "doodle">Doodle It!</div>
     </div>
@@ -617,12 +727,17 @@
     <div id = "drawScreen">
 
         <div id = "doodleThis">Now Doodling...</div>
+        <div id="instructions">?</div>
+        <div id = "doodleInstructions">
+            Already know this candidates stance on the issue? Great, grab a pen & paper and start doodling! Not sure what their stance is? <a style = "color:#FE4841;" target="_BLANK" href = "http://www.google.com" id = "instructionsSearch">Figure it out</a> first!
+        </div>
+        <div id="doodleInstructionsBG"></div>
         <div id="candidate2">
-        
+            
         </div>
         
         <div id = "fullStance"></div>
-        <a target="_BLANK" id = "search2" href = "google.com">Learn More?</a>
+        <a target="_BLANK" id = "search2" href = "google.com">Learn About This</a>
         <div id = "or">or</div>
         <div id = "OrDrawInBrowser">draw in browser</div>
         <div id="doodleUploadWrap">Upload Photo
@@ -639,7 +754,7 @@
         $('#simple_sketch').sketch();
         });
         </script>
-        <a download="doodle.jpg" id = "doneDrawing">Done</a>
+        <a download="doodle.jpg" id = "doneDrawing">Done</a><div id = "clearDoodle">Erase Canvas</div>
 
     </div>
 
@@ -649,13 +764,13 @@
 
     <div id = "shareScreen">
         <div id = "shareYourDoodle">
-            <div>Share Your Doodle!</div>
+            <div><span style = "color:#FE4841;">Nice one!</span><br>Share Your Doodle!</div>
         </div>
         <div id = "shareText">use the tag<br>
 <span>#makeamericadoodleagain</span><br>
 CHALLENGE YOUR FRIENDS!</div>
         <div id = "shareit">Share it!</div>
-        <div id = "replay">Replay?</div>
+        <div id = "replay">Doodle Again</div>
         <div id = "shareBG"></div>
     </div>
 
@@ -681,21 +796,31 @@ CHALLENGE YOUR FRIENDS!</div>
     currCandidateId = 0;
     $(document).ready(function(){
                 
-                setTimeout(function(){
-                    var canvas = document.getElementById("simple_sketch");
-                    var ctx = canvas.getContext("2d");
-                    ctx.fillStyle = "white";
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                },1000);
+                function setupCanvas(){
+                    setTimeout(function(){
+                        var canvas = document.getElementById("simple_sketch");
+                        var ctx = canvas.getContext("2d");
+                        window.context = document.getElementById("simple_sketch").getContext("2d");
+                        ctx.fillStyle = "white";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    },1000);
+                }
+
+                setupCanvas();
                 
+                $('#menu').click(function(){
+                    $(this).toggleClass('active');
+                });
                 
                 showChooseScreen();
                 
                 $("#stop").click(function(){
                     $("#stop").hide();
                     clearInterval(roulette);
-                    $('#search').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').show();
+                    $('#search').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').fadeIn();
                     $('#search2').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').show();
+                    $('#instructionsSearch').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').show();
+                    
                     $('#doodle').show();
                 });
                 
@@ -775,8 +900,35 @@ CHALLENGE YOUR FRIENDS!</div>
                     showShareScreen(); 
 
                 });
+
+                $("#clearDoodle").click(function(){
+                    var canvas = document.getElementById("simple_sketch");
+                    window.context.setTransform(1, 0, 0, 1, 0, 0);
+                    window.context.clearRect(0, 0, canvas.width, canvas.height);
+                    $('#simple_sketch').sketch().actions = [];
+                    setupCanvas();
+                    $('#simple_sketch').sketch();
+                });
+
+
+
+                $("#instructions").click(function(){
+                    $('#doodleInstructions').toggleClass('active');
+                    $('#doodleInstructionsBG').toggleClass('active');
+                });
+
+                $('#doodleInstructionsBG').click(function(){
+                    $('#doodleInstructions').toggleClass('active');
+                    $('#doodleInstructionsBG').toggleClass('active');
+                });
                 
                 $('#replay').click(function(){
+                    var canvas = document.getElementById("simple_sketch");
+                    window.context.setTransform(1, 0, 0, 1, 0, 0);
+                    window.context.clearRect(0, 0, canvas.width, canvas.height);
+                    $('#simple_sketch').sketch().actions = [];
+                    setupCanvas();
+                    $('#simple_sketch').sketch();
                    showChooseScreen(); 
                 });
 
@@ -791,9 +943,10 @@ CHALLENGE YOUR FRIENDS!</div>
                         mobile_iframe: true,
                         link: 'https://www.makeamericadoodleagain.com',
                         picture: window.url,
-
-                        caption: 'test testtest'
-                      }, function(response){});              
+                        name:"This election is as awful as my doodle.",
+                        caption: 'Building walls, banning abortion, and crazy emails. The best thing about this election is my doodle, and Ken Bone.',
+                        description:"www.makeamericadoodleagain.com"
+                      }, function(response){});
                 }
 
                 
@@ -801,6 +954,9 @@ CHALLENGE YOUR FRIENDS!</div>
                 
                 function showChooseScreen(){
                     document.getElementById("doodleUpload").value = "";
+
+                    
+
                     $('#drawinBrowser').hide();
                     $('#shareScreen').hide();
                     $('#chooseScreen').show();
