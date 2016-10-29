@@ -29,7 +29,8 @@
 
     body,html{
         font-family:Bebas Neue;
-        background:#472094;
+        letter-spacing:2px;
+        background:url('img/Backgroundx2.png');
         width:100%;
         height:100%;
         position:absolute;
@@ -42,31 +43,33 @@
     
     #candidate{
         position: relative;
-        width: 100%;
-        max-width:400px;
+        width: 200px;
         margin:auto;
         height:200px;
         font-size:40px;
         text-align:center;
+        margin-top:40px;
+        border:3px solid #492E8D;
+        border-radius:200px;
     }
 
     #candidate[candidate="Hillary"]{
-        background:url('img/clintons_face@2x.png') no-repeat center center;
+        background:url('img/Clinton.png') no-repeat center center;
         background-size:contain;
     }
 
     #candidate[candidate="Donald"]{
-        background:url('img/trumps_face@2x.png') no-repeat center center;
+        background:url('img/Trump.png') no-repeat center center;
         background-size:contain;
     }
 
     #candidate[candidate="Jill"]{
-        background:url('img/steins_face@2x.png') no-repeat center center;
+        background:url('img/Stein.png') no-repeat center center;
         background-size:contain;
     }
 
     #candidate[candidate="Gary"]{
-        background:url('img/johnsons_face@2x.png') no-repeat center center;
+        background:url('img/Johnson.png') no-repeat center center;
         background-size:contain;
     }
     
@@ -76,10 +79,23 @@
         width: 100%;
         max-width:400px;
         margin:auto;
-        height:80px;
-        font-size:40px;
+        height:30px;
+        font-size:30px;
         text-align:center;
-        color:white;
+        color:#FE4841;
+        margin-top:40px;
+        margin-bottom:0px;
+    }
+
+    #candidateName{
+        position: relative;
+        width: 100%;
+        max-width:400px;
+        margin:auto;
+        height:30px;
+        font-size:30px;
+        text-align:center;
+        color:#FE4841;
         margin-top:30px;
         margin-bottom:0px;
     }
@@ -90,14 +106,12 @@
         max-width:400px;
         margin:auto;
         height:10px;
-        font-size:40px;
+        font-size:50px;
         text-align:center;
-        font-weight:bold;
-        margin-top:100px;
-        background:url('img/doodle_title@2x.png') no-repeat center center;
-        background-size:contain;
+        margin-top:10px;
         padding: 20px 0px;
         margin-bottom:40px;
+        color:#492E8D;
     }
     
     #stance{
@@ -106,20 +120,18 @@
         max-width:400px;
         margin:auto;
         height:10px;
-        font-size:40px;
+        font-size:50px;
         text-align:center;
-        font-weight:bold;
-        background:url('img/stanceon_title@2x.png') no-repeat center center;
-        background-size:contain;
         padding: 20px 0px;
         margin-bottom:20px;
-        margin-top:20px;
+        margin-top:0px;
+        color:#492E8D;
     }
     
     #stop{
         margin: auto;
         display: block;
-        width: 60px;
+        width: 150px;
         text-align: center;
         height: 60px;
         border-radius: 100px;
@@ -127,6 +139,7 @@
         line-height: 60px;
         color: white;
         background:#FE4841;
+        margin-top:60px;
     }
     
     #search{
@@ -257,7 +270,6 @@
         height:50px;
         position:absolute;
         z-index:100000;
-        background:#FE4841;
     }
 
     #logo{
@@ -305,7 +317,6 @@
         width:100%;
         position:absolute;
         overflow:hidden;
-        background:white;
     }
 
     #OrDrawInBrowser{
@@ -384,7 +395,6 @@
 
 
     <div id = "landingPage">
-        <div id = "purpleBG"></div>
         <nav id = "mainNav">
             <div id = "logo"></div>
             <div id = "menu">
@@ -394,13 +404,18 @@
         </nav>
     </div>
     <div id = "chooseScreen">
-        <div id = "draw"></div>
-        
+
         <div id="candidate">
             
         </div>
+
+        <div id = "draw">DOODLE</div>
         
-        <div id = "stance"></div>
+        <div id="candidateName">
+            Trump
+        </div>
+        
+        <div id = "stance">STANCE ON</div>
         
             
         <div id="issue">
