@@ -603,6 +603,21 @@
         opacity:1;
     }
 
+    #closeDoodle{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: #FE4841;
+        color: white;
+        padding: 10px;
+        border-radius: 100px;
+        width: 18px;
+        height: 18px;
+        line-height: 20px;
+        text-align: center;
+        z-index: 100;
+    }
+
     @media screen and (max-width: 500px) {
         #stop {
             width:100%;
@@ -746,7 +761,7 @@
     </div>
 
     <div id = "drawinBrowser">
-        
+        <div id = "closeDoodle">✕</div>
         <!-- sketching in browser -->
         <canvas id="simple_sketch" width="300" height="500"></canvas>
         <script type="text/javascript">
@@ -910,6 +925,9 @@ CHALLENGE YOUR FRIENDS!</div>
                     $('#simple_sketch').sketch();
                 });
 
+                $("#closeDoodle").click(function(){
+                    $("#drawinBrowser").hide();
+                });
 
 
                 $("#instructions").click(function(){
