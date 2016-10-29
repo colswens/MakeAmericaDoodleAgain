@@ -806,7 +806,7 @@ CHALLENGE YOUR FRIENDS!</div>
     
     <script>
     var candidates = ['Hillary Clinton','Donald Trump','Jill Stein','Gary Johnson'];
-    var candidatesShort = ['Hillary\'s','Donald\'s','Jill\'s','Gary\'s'];
+    var candidatesShort = ['Hillary','Donald','Jill','Gary];
     var issues = ['Fracking','Drug War','Private Prisons','Death Penalty','Student Debt','Standing Rock Protestors','Recreational Cannabis','Drinking Age','Voting requirements','Felon Voting Rights','Third-Party Candidates','LGBTQ Rights','Torture Techniques','NSA Surveillance','Military Budget','Military Intervention/ ISIS Intervention','Millenials','US-Russia Relations','Gender Identity','Trans Pacific Partnership','Free College','Black Lives Matter','Global Warming','China, China, China','Police Brutality','Planned Parenthood','Guns','Obamacare','Building the Wall','Minimum Wage','Big Pharma','Refugees','Social Security','Tax Increase','Corporate Tax','Smoking a Doobie','Size of the Government','NSA surveillance','Edward Snowden','Miss Universe','Breaking Up The Banks','Net Neutrality','Their Opponents Hair'];
     currIssueId = Math.floor(Math.random()*issues.length);
     currCandidateId = 0;
@@ -996,7 +996,7 @@ CHALLENGE YOUR FRIENDS!</div>
                         }
                        $('#candidate').attr('candidate',candidatesShort[currCandidateId]);
                        $('#candidate2').attr('candidate',candidatesShort[currCandidateId]);
-                       $('#candidateName').html(candidatesShort[currCandidateId]);
+                       $('#candidateName').html(candidatesShort[currCandidateId]+"\'s");
                     },120);
                 }
 
