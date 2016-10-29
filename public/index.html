@@ -291,8 +291,16 @@
 
     #menu{
         position:absolute;
-        right:20px;
+        right:0px;
+        padding-right:40px;
         height:100%;
+        opacity:0px;
+        width:0px;
+        overflow:hidden;
+    }
+
+    #menu.active{
+        width:200px;
     }
 
     #menu>a>div{
@@ -478,13 +486,12 @@
         </script>
         <a download="doodle.jpg" id = "doneDrawing">Done</a>
 
-        
-
     </div>
 
 
 
     <div style = "display:none;" id = "drawScreen_old">
+
         <div id = "fullStance"></div>
         <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
         <div id = "OrDrawInBrowser">Or, draw in the browser</div>
@@ -493,6 +500,7 @@
             <input id="doodleUpload" type = "file"/>
         </div>
         <div id = "done">Done</div>
+
     </div>
 
 
