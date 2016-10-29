@@ -43,9 +43,9 @@
     
     #candidate{
         position: relative;
-        width: 200px;
+        width: 160px;
         margin:auto;
-        height:200px;
+        height:160px;
         font-size:40px;
         text-align:center;
         margin-top:40px;
@@ -140,6 +140,7 @@
         color: white;
         background:#FE4841;
         margin-top:60px;
+        font-size:30px;
     }
     
     #search{
@@ -163,15 +164,18 @@
 
     
     #doodle{
-        display: block;
-        padding: 20px;
-        width: 150px;
-        text-align: center;
         margin: auto;
-        background: #FE4841;
+        display: block;
+        width: 220px;
+        text-align: center;
+        height: 60px;
         border-radius: 100px;
-        margin-top: 20px;
+        background: black;
+        line-height: 60px;
         color: white;
+        background:#FE4841;
+        margin-top:0px;
+        font-size:30px;
     }
     
     #fullStance{
@@ -266,10 +270,13 @@
     }
 
     #mainNav{
-        width:100%;
+        left:0px;
         height:50px;
         position:absolute;
         z-index:100000;
+        background:url('img/HamburgerMenux2.png') right center no-repeat;
+        background-size:20px;
+        right:10px;
     }
 
     #logo{
@@ -278,13 +285,13 @@
         height:100%;
         background:white;
         width:30px;
-        background:url('img/Simple_Logo_White.png') no-repeat center center;
+        background:url('img/LogoSmallx2.png') no-repeat center center;
         background-size:contain;
     }
 
     #menu{
         position:absolute;
-        right:10px;
+        right:20px;
         height:100%;
     }
 
@@ -307,9 +314,11 @@
     }
 
     #chooseScreen, #drawScreen, #shareScreen{
-        position:relative;
+        position:absolute;
         z-index:1;
         height:100%;
+        top:0px;
+        width:100%;
     }
 
     #landingPage{
@@ -366,6 +375,24 @@
         cursor: pointer;
         opacity: 0;
         filter: alpha(opacity=0);
+    }
+
+    @media screen and (max-width: 500px) {
+        #stop {
+            width:100%;
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            border-radius:0px;
+        }
+
+        #doodle {
+            width:100%;
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            border-radius:0px;
+        }
     }
 
     
@@ -453,6 +480,19 @@
 
         
 
+    </div>
+
+
+
+    <div style = "display:none;" id = "drawScreen_old">
+        <div id = "fullStance"></div>
+        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
+        <div id = "OrDrawInBrowser">Or, draw in the browser</div>
+        <div id = "timer">4:00</div>
+        <div id="doodleUploadWrap">Upload Doodle
+            <input id="doodleUpload" type = "file"/>
+        </div>
+        <div id = "done">Done</div>
     </div>
 
 
