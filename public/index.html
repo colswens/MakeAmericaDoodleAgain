@@ -172,7 +172,7 @@
         background: black;
         line-height: 60px;
         color: white;
-        background:#FE4841;
+        background:#492E8D;
         margin-top:60px;
         font-size:30px;
     }
@@ -216,7 +216,7 @@
         background: black;
         line-height: 60px;
         color: white;
-        background:#FE4841;
+        background:#492E8D;
         margin-top:0px;
         font-size:30px;
     }
@@ -268,7 +268,7 @@
         width: 60px;
         border-radius: 60px;
         color: white;
-        background:#FE4841;
+        background:#492E8D;
     }
 
      #doneDrawing{
@@ -282,42 +282,37 @@
         width: 60px;
         border-radius: 60px;
         color: white;
-        background:#FE4841;
+        background:#492E8D;
+        font-size: 30px;
     }
 
-     #doneDrawing{
-        margin-left:-45px;
-        left:50%;
-        text-align: center;
-        bottom:40px;
-        position: absolute;
-        padding: 20px;
-        background: black;
-        width: 60px;
-        border-radius: 60px;
-        color: white;
-        background:#FE4841;
-    }
     
     #replay{
         padding:20px;
         margin:20px auto;
-        background:#FE4841;
+        background:#472094;
         color:white;
         border-radius:50px;
-        width:100px;
+        width: 200px;
         text-align:center;
+        z-index:100;
+        position:relative;
+        box-sizing: border-box;
+        font-size: 30px;
     }
     
     #shareit{
         padding:20px;
-        margin:auto;
-        background:#FE4841;
+        margin:20px auto;
+        background:#472094;
         color:white;
         border-radius:50px;
-        width:100px;
+        width: 200px;
         text-align:center;
-        margin-top:100px;
+        z-index:100;
+        position:relative;
+        box-sizing: border-box;
+        font-size: 30px;
     }
 
     #mainNav{
@@ -400,6 +395,7 @@
         line-height: 22px;
         color: #472094;
         text-align:center;
+        cursor:pointer;
     }
 
     #drawinBrowser{
@@ -451,7 +447,8 @@
         font-size: 20px;
         cursor: pointer;
         opacity: 0;
-
+        display: block;
+        width: 100%;
         filter: alpha(opacity=0);
     }
 
@@ -474,6 +471,41 @@
         pointer-events:none;
     }
 
+    #shareYourDoodle{
+        border: 2px solid #472094;
+        background: white;
+        padding: 20px;
+        color: #472094;
+        font-size: 50px;
+        text-align: center;
+        width: 240px;
+        margin: auto;
+        margin-top: 80px;
+        position:relative;
+        z-index:20;
+    }
+
+    #shareText{
+        position:relative;
+        z-index:20;
+        color:white;
+        text-align:center;
+        padding: 20px 0px;
+    }
+
+    #shareText>span{
+        color:#472094;
+    }
+
+    #shareBG{
+        background:#FE4841;
+        top:160px;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        position:absolute;
+    }
+
     @media screen and (max-width: 500px) {
         #stop {
             width:100%;
@@ -491,6 +523,15 @@
             border-radius:0px;
         }
 
+        #replay{
+            width:100%;
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            border-radius:0px;
+            margin-bottom: 0px;
+        }
+
         #doodleUploadWrap{
             width:100%;
             position:fixed;
@@ -498,6 +539,17 @@
             left:0px;
             border-radius:0px;
             padding-right:100px;
+        }
+
+        #doneDrawing{
+            width:100%;
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            border-radius:0px;
+            margin:0px;
+            box-sizing:border-box;
+            line-height: 22px;
         }
     }
 
@@ -596,8 +648,15 @@
 
 
     <div id = "shareScreen">
+        <div id = "shareYourDoodle">
+            <div>Share Your Doodle!</div>
+        </div>
+        <div id = "shareText">use the tag<br>
+<span>#makeamericadoodleagain</span><br>
+CHALLENGE YOUR FRIENDS!</div>
         <div id = "shareit">Share it!</div>
         <div id = "replay">Replay?</div>
+        <div id = "shareBG"></div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
@@ -693,6 +752,8 @@
 
                    },'image/png');
 
+                    showShareScreen();
+
 
                    //this.href = dt;
 
@@ -739,6 +800,7 @@
                 var roulette;
                 
                 function showChooseScreen(){
+                    document.getElementById("doodleUpload").value = "";
                     $('#drawinBrowser').hide();
                     $('#shareScreen').hide();
                     $('#chooseScreen').show();
