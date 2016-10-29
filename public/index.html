@@ -41,7 +41,7 @@
     
     
     
-    #candidate{
+    #candidate, #candidate2{
         position: relative;
         width: 160px;
         margin:auto;
@@ -53,24 +53,58 @@
         border-radius:200px;
     }
 
-    #candidate[candidate="Hillary"]{
+    #candidate[candidate="Hillary"],#candidate2[candidate="Hillary"]{
         background:url('img/Clinton.png') no-repeat center center;
         background-size:contain;
     }
 
-    #candidate[candidate="Donald"]{
+    #candidate[candidate="Donald"],#candidate2[candidate="Donald"]{
         background:url('img/Trump.png') no-repeat center center;
         background-size:contain;
     }
 
-    #candidate[candidate="Jill"]{
+    #candidate[candidate="Jill"],#candidate2[candidate="Jill"]{
         background:url('img/Stein.png') no-repeat center center;
         background-size:contain;
     }
 
-    #candidate[candidate="Gary"]{
+    #candidate[candidate="Gary"],#candidate2[candidate="Gary"]{
         background:url('img/Johnson.png') no-repeat center center;
         background-size:contain;
+    }
+
+    @-moz-keyframes spin {
+        from { -moz-transform: rotate(0deg); }
+        to { -moz-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+        from {transform:rotate(0deg);}
+        to {transform:rotate(360deg);}
+    }
+
+    #candidate2{
+        -webkit-animation-name: spin;
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 1000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 1000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    -o-transition: rotate(3600deg);
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transition: rotate(3600deg);
     }
     
     
@@ -152,6 +186,15 @@
         color:#FE4841!important;
     }
 
+    #search2{
+        display: block;
+        padding: 20px;
+        width: 180px;
+        text-align: center;
+        margin: auto;
+        color:#FE4841!important;
+    }
+
 
    #browserDraw{
         display: block;
@@ -177,25 +220,33 @@
         margin-top:0px;
         font-size:30px;
     }
+
+    #doodleThis{
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+        height: 10px;
+        font-size: 40px;
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px 0px;
+        margin-bottom: 60px;
+        color: #492E8D;
+    }
     
     #fullStance{
         text-align: center;
         margin: auto;
         max-width: 300px;
         width: 100%;
-        font-size: 40px;
-        background: #FE4841;
+        font-size: 25px;
         padding: 20px;
-        color: white;
-        position:relative;
-        top:100px;
-        font-style:italic;
+        color: #FE4841;
+        position: relative;
+        top: 20px;
     }
 
-    #fullStance>span{
-        font-weight:bold;
-        font-style:normal;
-    }
     
     #back{
         padding:20px;
@@ -337,8 +388,17 @@
     }
 
     #OrDrawInBrowser{
-        margin:auto;
-        color:#FE4841;
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        z-index: 100;
+        background: #805CDB;
+        height: 60px;
+        box-sizing: border-box;
+        padding: 10px;
+        width: 100px;
+        line-height: 22px;
+        color: #472094;
         text-align:center;
     }
 
@@ -349,6 +409,7 @@
         top:0px;
             z-index: 100000;
             background:rgba(0,0,0,.9);
+
     }
 
     #simple_sketch{
@@ -364,25 +425,53 @@
     }
 
     #doodleUploadWrap {
-        position: relative;
-        overflow: hidden;
-        background: #FE4841;
-        border-radius: 100px;
-        margin: 10px auto;
-        padding: 10px;
-        width: 160px;
-        text-align: center;
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        border-radius: 0px;
+        padding-right: 120px;
+        box-sizing: border-box;
+        color: white;
+        margin: 0px;
+        height: 60px;
+        line-height: 60px;
+        text-align:center;
+        font-size: 30px;
+        background:#472094;
     }
     #doodleUploadWrap input {
         position: absolute;
         top: 0;
-        right: 0;
+        right: 120px;
+        bottom:0;
+        left:0;
         margin: 0;
         padding: 0;
         font-size: 20px;
         cursor: pointer;
         opacity: 0;
+
         filter: alpha(opacity=0);
+    }
+
+    #or{
+        border: 2px solid #472094;
+        color: #472094;
+        font-size: 12px;
+        padding: 2px;
+        text-align: center;
+        line-height: 20px;
+        background: #805CDB;
+        width: 20px;
+        height: 20px;
+        line-height: 22px;
+        font-size: 14px;
+        bottom: 15px;
+        right: 90px;
+        position: fixed;
+        z-index: 10000;
+        pointer-events:none;
     }
 
     @media screen and (max-width: 500px) {
@@ -400,6 +489,15 @@
             bottom:0px;
             left:0px;
             border-radius:0px;
+        }
+
+        #doodleUploadWrap{
+            width:100%;
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            border-radius:0px;
+            padding-right:100px;
         }
     }
 
@@ -459,20 +557,25 @@
         
         <div id = "stop">Stop</div>
         
-        <a target="_BLANK" id = "search" href = "google.com">What is their stance?</a>
+        <a target="_BLANK" id = "search" href = "google.com">Learn More?</a>
         
         <div id = "doodle">Doodle It!</div>
     </div>
 
     <div id = "drawScreen">
+
+        <div id = "doodleThis">Now Doodling...</div>
+        <div id="candidate2">
+        
+        </div>
+        
         <div id = "fullStance"></div>
-        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
-        <div id = "OrDrawInBrowser">Or, draw in the browser</div>
-        <div id = "timer">4:00</div>
-        <div id="doodleUploadWrap">Upload Doodle
+        <a target="_BLANK" id = "search2" href = "google.com">Learn More?</a>
+        <div id = "or">or</div>
+        <div id = "OrDrawInBrowser">draw in browser</div>
+        <div id="doodleUploadWrap">Upload Photo
             <input id="doodleUpload" type = "file"/>
         </div>
-        <div id = "done">Done</div>
     </div>
 
     <div id = "drawinBrowser">
@@ -490,18 +593,6 @@
 
 
 
-    <div style = "display:none;" id = "drawScreen_old">
-
-        <div id = "fullStance"></div>
-        <p style = "text-align:center; padding:20px; padding-top:120px; color:white; margin:auto; width:100%; max-width:200px;">Quick! find some paper and start doodling!</p>
-        <div id = "OrDrawInBrowser">Or, draw in the browser</div>
-        <div id = "timer">4:00</div>
-        <div id="doodleUploadWrap">Upload Doodle
-            <input id="doodleUpload" type = "file"/>
-        </div>
-        <div id = "done">Done</div>
-
-    </div>
 
 
     <div id = "shareScreen">
@@ -545,6 +636,7 @@
                     $("#stop").hide();
                     clearInterval(roulette);
                     $('#search').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').show();
+                    $('#search2').attr('href','http://www.google.com/search?q='+candidates[currCandidateId]+'+stance+on+'+issues[currIssueId]+'&btnG').show();
                     $('#doodle').show();
                 });
                 
@@ -666,6 +758,7 @@
                             currCandidateId = 0;
                         }
                        $('#candidate').attr('candidate',candidatesShort[currCandidateId]);
+                       $('#candidate2').attr('candidate',candidatesShort[currCandidateId]);
                     },120);
                 }
 
@@ -685,7 +778,7 @@
                 }
 
                 function showDoodleScreen(){
-                    $('#fullStance').html('Doodling <span>'+candidates[currCandidateId]+"\'s</span> stance on <span>"+issues[currIssueId]+"</span");
+                    $('#fullStance').html('<span>'+candidates[currCandidateId]+"\'s</span> stance on <span>"+issues[currIssueId]+"</span");
                     $('#chooseScreen').hide();
                     $('#drawScreen').show();
                     startDoodleTimer();
