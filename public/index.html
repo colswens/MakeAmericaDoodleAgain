@@ -428,6 +428,10 @@
         width:100%;
     }
 
+    #shareScreen{
+        background:white;
+    }
+
     #landingPage{
         height:100%;
         width:100%;
@@ -693,7 +697,7 @@
     }
 
     #shareScreenBG{
-        opacity:.3;
+        opacity:.1;
         width:100%;
         height:100%;
         position:absolute;
@@ -918,7 +922,7 @@ CHALLENGE YOUR FRIENDS!</div>
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
                             console.log(url);
                             window.url = url;
-                            $('#shareScreenBG').css('background','white url("'+window.url+'") center center').css('background-size','200px');
+                            $('#shareScreenBG').css('background','white url("'+window.url+'") center top').css('background-size','200px');
                             newPostRef.set({
                                 url:key,
                                 fullURL:url
