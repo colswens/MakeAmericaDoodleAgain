@@ -692,6 +692,14 @@
         }
     }
 
+    #shareScreenBG{
+        opacity:.3;
+        width:100%;
+        height:100%;
+        position:absolute;
+        top:0px;
+    }
+
 
     @media screen and (max-height: 550px) {
         #candidate, #candidate2{
@@ -773,7 +781,7 @@
 
     <div id = "drawScreen">
 
-        <div id = "doodleThis">Now Doodling...</div>
+        <div id = "doodleThis">Doodle It!</div>
         <div id="instructions">?</div>
         <div id = "doodleInstructions">
             Already know this candidates stance on the issue? Great, grab a pen & paper and start doodling! Not sure what their stance is? <a style = "color:#FE4841;" target="_BLANK" href = "http://www.google.com" id = "instructionsSearch">Figure it out</a> first!
@@ -810,6 +818,7 @@
 
 
     <div id = "shareScreen">
+        <div id = "shareScreenBG"></div>
         <div id = "shareYourDoodle">
             <div><span style = "color:#FE4841;">Nice one!</span><br>Share Your Doodle!</div>
         </div>
@@ -909,6 +918,7 @@ CHALLENGE YOUR FRIENDS!</div>
                         var thisUrl = storageRef.getDownloadURL().then(function(url){
                             console.log(url);
                             window.url = url;
+                            $('#shareScreenBG').css('background','white url("'+window.url+'") center center').css('background-size','200px');
                             newPostRef.set({
                                 url:key,
                                 fullURL:url
